@@ -1,18 +1,33 @@
-#include "raylib.h"
 #include "erl_nif.h"
+#include "raylib.h"
 
 // Wrapper type for all Erlang types
 static ERL_NIF_TERM init_window(ErlNifEnv *env, int argc,
                                 const ERL_NIF_TERM argv[]) {
-  int width, height;
-  // FIXME: add check of size
-  char title[1024];
+  // var: width
+  int width;
+  if (enif_get_int(env, argv[0], &width) < 1)
+    return enif_make_badarg(env);
 
-  enif_get_int(env, argv[0], &width);
-  enif_get_int(env, argv[1], &height);
-  enif_get_string(env, argv[2], title, sizeof(title), ERL_NIF_LATIN1);
+  // var: height
+  int height;
+  if (enif_get_int(env, argv[1], &height) < 1)
+    return enif_make_badarg(env);
 
+  // var: title
+  unsigned int len;
+  enif_get_list_length(env, argv[2], &len);
+
+  char *title = enif_alloc(sizeof(char *) * (len + 1));
+  if (enif_get_string(env, argv[2], title, sizeof(title), ERL_NIF_LATIN1) < 1)
+    return enif_make_badarg(env);
+
+  // binding
   InitWindow(width, height, title);
+
+  // free title
+  enif_free(title);
+
   return enif_make_atom(env, "ok");
 }
 
