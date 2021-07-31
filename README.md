@@ -11,6 +11,7 @@ You need the following deps installed on your system:
 * elixir
 * raylib
 * make
+* gcc
 
 Now you can run:
 ```bash
