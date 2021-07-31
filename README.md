@@ -1,21 +1,56 @@
 # Rayex
 
-Rayex is an almost 1 to 1 binding with raylib
+> Warning: \
+> WIP, many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help
 
-## Installation
+Rayex is an (almost) 1 to 1 binding with [raylib](https://www.raylib.com/)
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `rayex` to your list of dependencies in `mix.exs`:
+## How to run
 
-```elixir
-def deps do
-  [
-    {:rayex, "~> 0.1.0"}
-  ]
-end
+You need the following deps installed on your system:
+* elixir
+* raylib
+* make
+
+Now you can run:
+```bash
+mix deps.get
+iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/rayex](https://hexdocs.pm/rayex).
+To test if you can open a new window with raylib run (on iex)`
+```bash
+Rayex.Core.init_window 200, 200, 'window name'
+```
 
+## Contributing
+
+There are a few things that you need to know about the code:
+* This project aims to run each one of [those functions](https://www.raylib.com/cheatsheet/cheatsheet.html) with elixir
+* To do so, we are building a generator that can be found at `lib/utils/generator/*`
+* This generator will help with the writing of the `lib/rayex/*` and `src/raylib_*` (the elixir and C nif files)
+* You can help building the generator or expanding these files, any will help a lot, because they are almost 1 to 1 so its easy to re-use the code, feel free to choose what fits you best
+* The C source is automatically compiled using a mix task on `mix/task/compile_raylib.ex` that uses the `Makefile` under the hood
+* If you want to help with the generator, please keep the tests updated and test the code! Also, if you want to help with the source files, please test the code too!
+
+The `erl_nif.h` docs can be found [HERE](https://erlang.org/doc/man/erl_nif.html)
+
+> Sidenote: \
+> If you wanna help writing the C nifs, add the following export before opening your editor: \
+> `export C_INCLUDE_PATH=$(erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)`
+
+## License
+
+   Copyright 2021 Shiryel
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
