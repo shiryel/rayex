@@ -40,7 +40,7 @@ defmodule Utils.Generator.CBoilerplate do
 
     static ErlNifFunc nif_funcs[] = {
       // {erl_function_name, erl_function_arity, c_function}
-      #{nif_funcs(functions)}
+    #{nif_funcs(functions)}
     };
 
     static int load(ErlNifEnv *env, void **priv_data, ERL_NIF_TERM load_info) {
