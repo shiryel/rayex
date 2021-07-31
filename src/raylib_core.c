@@ -18,8 +18,17 @@ static ERL_NIF_TERM init_window(ErlNifEnv *env, int argc,
   unsigned int len;
   enif_get_list_length(env, argv[2], &len);
 
-  char *title = enif_alloc(sizeof(char *) * (len + 1));
-  if (enif_get_string(env, argv[2], title, sizeof(title), ERL_NIF_LATIN1) < 1)
+  unsigned title_size = sizeof(char *) * (len + 1);
+  char *title = enif_alloc(title_size);
+
+  /*
+  if (!title) {
+    // TODO
+    // treat enif_alloc fail
+  }
+  */
+
+  if (enif_get_string(env, argv[2], title, title_size, ERL_NIF_LATIN1) < 1)
     return enif_make_badarg(env);
 
   // binding

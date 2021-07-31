@@ -132,8 +132,17 @@ defmodule Utils.Generator.CFunction do
       unsigned int #{var_name}_len;
       enif_get_list_length(env, argv[#{var_number}], &#{var_name}_len);
 
-      char *#{var_name} = enif_alloc(sizeof(char *) * (#{var_name}_len + 1));
-      if (enif_get_string(env, argv[#{var_number}], #{var_name}, sizeof(#{var_name}), ERL_NIF_LATIN1) < 1)
+      unsigned #{var_name}_size = sizeof(char *) * (#{var_name}_len + 1);
+      char *#{var_name} = enif_alloc(#{var_name}_size);
+
+      /*
+      if (!#{var_name}) {
+        // TODO
+        // treat enif_alloc fail
+      }
+      */
+
+      if (enif_get_string(env, argv[#{var_number}], #{var_name}, #{var_name}_size, ERL_NIF_LATIN1) < 1)
         return enif_make_badarg(env);
     """
   end
