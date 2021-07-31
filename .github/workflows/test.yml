@@ -3,7 +3,7 @@ name: Run Tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -42,12 +42,16 @@ jobs:
         mix deps.get
 
     - name: Compile
-      run: |
-        mix compile --warnings-as-errors
+      run: mix compile --warnings-as-errors
 
-    - name: Test
-      run: |
-        mix test
-        mix credo --strict
-        mix format --check-formatted
-        mix dialyzer
+    - name: Check Tests
+      run: mix test
+
+    - name: Check Credo
+      run: mix credo --strict
+
+    - name: Check Format
+      run: mix format --check-formatted
+
+    - name: Check Dialyzer
+      run: mix dialyzer
