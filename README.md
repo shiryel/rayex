@@ -40,3 +40,7 @@ The `erl_nif.h` docs can be found [HERE](https://erlang.org/doc/man/erl_nif.html
 > `export C_INCLUDE_PATH=$(erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell)`
 
 ## License
+
+MIT License
+
+Copyright (c) 2021 Shiryel
