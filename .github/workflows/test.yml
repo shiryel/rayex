@@ -6,50 +6,48 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        otp: ['23.3', '24.0']
+        elixir: ['1.11.4', '1.12.2']
+
     steps:
-    - name: OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-      strategy:
-        matrix:
-          otp: ['23.3', '24.0']
-          elixir: ['1.11.4', '1.12.2']
+    - name: Checkout 
+      uses: actions/checkout@v2
 
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Elixir
-        uses: erlef/setup-beam@v1
-        with:
-          otp-version: ${{matrix.otp}}
-          elixir-version: ${{matrix.elixir}}
+    - name: Setup OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+      uses: erlef/setup-beam@v1
+      with:
+        otp-version: ${{matrix.otp}}
+        elixir-version: ${{matrix.elixir}}
       
-      - name: Get Deps Cache
-        uses: actions/cache@v2
-        id: cache-deps
-        with:
-          path: deps/
-          key: ${{hashFiles('mix.lock')}}-deps
+    - name: Get Deps Cache
+      uses: actions/cache@v2
+      id: cache-deps
+      with:
+        path: deps/
+        key: ${{hashFiles('mix.lock')}}-deps
 
-      - name: Get Build Cache
-        uses: actions/cache@v2
-        with:
-          path: _build/
-          key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-${{hashFiles('mix.lock')}}-build
+    - name: Get Build Cache
+      uses: actions/cache@v2
+      with:
+        path: _build/
+        key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-${{hashFiles('mix.lock')}}-build
 
-      - name: Get deps
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: | 
-          mix local.rebar --force
-          mix local.hex --force
-          mix deps.get
+    - name: Get deps
+      if: steps.cache-deps.outputs.cache-hit != 'true'
+      run: | 
+        mix local.rebar --force
+        mix local.hex --force
+        mix deps.get
 
-      - name: Compile
-        run: |
-          mix compile --warnings-as-errors
+    - name: Compile
+      run: |
+        mix compile --warnings-as-errors
 
-      - name: Test
-        run: |
-          mix test
-          mix credo --strict
-          mix format --check-formatted
-          mix dialyzer
+    - name: Test
+      run: |
+        mix test
+        mix credo --strict
+        mix format --check-formatted
+        mix dialyzer
