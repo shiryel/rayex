@@ -1,5 +1,5 @@
 defmodule Rayex do
-	@moduledoc """
+  @moduledoc """
     Rayex is an almost 1 to 1 binding with raylib
 
     Raylib cheatsheet: https://www.raylib.com/cheatsheet/cheatsheet.html
