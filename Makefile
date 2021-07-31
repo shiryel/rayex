@@ -12,16 +12,26 @@ ifneq ($(OS),Windows_NT)
 	endif
 endif
 
-.PHONY: all pre clean
-
+.PHONY: all
 all: pre priv/raylib_core.so
 
+.PHONY: pre
 pre:
 	mkdir -p priv
 
+.PHONY: clean
 clean:
 	mix clean
 	rm -r priv
+
+.PHONY: test
+test:
+	mix compile --warnings-as-errors
+	mix test
+	mix format
+	mix format --check-formatted
+	mix credo --strict
+	mix dialyzer
 
 priv/raylib_core.so: src/raylib_core.c
 	$(CC) $(CFLAGS) -shared $(LDFLAGS) -o $@ src/raylib_core.c

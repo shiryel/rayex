@@ -74,66 +74,38 @@ defmodule Utils.Generator.ElixirFunction do
     end
   end
 
+  @c_types %{
+    "bool" => "boolean()",
+    "int" => "integer()",
+    "int*" => "integer()",
+    "unsigned int" => "pos_integer()",
+    "unsigned int*" => "pos_integer()",
+    "short*" => "integer()",
+    "unsigned short" => "pos_integer()",
+    "char*" => "String.t()",
+    "char**" => "String.t()",
+    "unsigned char*" => "String.t()",
+    "unsigned char**" => "String.t()",
+    "void" => ":ok"
+  }
+
   defp parse_c_type(c_type) do
-    # NOTE: 
+    # NOTE:
     # - the string can start with a space
     # - its not expecting modifiers like const and static
     # - voids are converted to :ok
     regex = ~r/ ?(?<type>([[:alnum:]]|\ )+\*?\*?) /
 
     case Regex.named_captures(regex, c_type) do
-      # boolean
-      %{"type" => "bool"} ->
-        "boolean()"
-
-      # int
-      %{"type" => "int"} ->
-        "integer()"
-
-      %{"type" => "int*"} ->
-        "integer()"
-
-      %{"type" => "unsigned int"} ->
-        "pos_integer()"
-
-      %{"type" => "unsigned int*"} ->
-        "pos_integer()"
-
-      # short
-      %{"type" => "short"} ->
-        "integer()"
-
-      %{"type" => "unsigned short"} ->
-        "post_integer()"
-
-      # long
-      %{"type" => "long"} ->
-        "integer()"
-
-      %{"type" => "unsigned long"} ->
-        "post_integer()"
-
-      # string
-      %{"type" => "char*"} ->
-        "String.t()"
-
-      %{"type" => "char**"} ->
-        "String.t()"
-
-      %{"type" => "unsigned char*"} ->
-        "String.t()"
-
-      %{"type" => "unsigned char**"} ->
-        "String.t()"
-
-      # void
-      %{"type" => "void"} ->
-        ":ok"
-
-      # custom
       %{"type" => type} ->
-        Logger.debug("Parsing custom: #{inspect(c_type)}")
-        "#{Macro.underscore(type)}()"
+        result = Map.get(@c_types, type)
+
+        result ||
+          (
+            # don't find any, so... custom result
+            Logger.debug("Parsing custom: #{inspect(c_type)}")
+            "#{Macro.underscore(type)}()"
+          )
 
       nil ->
         Logger.error("Could not paser: #{inspect(c_type)}")

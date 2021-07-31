@@ -14,8 +14,8 @@ defmodule Utils.Generator.CBoilerplateTest do
   test "nif_stuff/2" do
     result = """
     /************
-    * NIF INIT *
-    ************/
+     * NIF INIT *
+     ************/
 
     static ErlNifFunc nif_funcs[] = {
       // {erl_function_name, erl_function_arity, c_function}
@@ -24,16 +24,16 @@ defmodule Utils.Generator.CBoilerplateTest do
     };
 
     static int load(ErlNifEnv *env, void **priv_data, ERL_NIF_TERM load_info) {
-    return 0;
+      return 0;
     }
 
     static int upgrade(ErlNifEnv *env, void **priv_data, void **old_priv_data,
              ERL_NIF_TERM load_info) {
-    return 0;
+      return 0;
     }
 
     static int reload(ErlNifEnv *env, void **priv_data, ERL_NIF_TERM load_info) {
-    return 0;
+      return 0;
     }
 
     static void unload(ErlNifEnv *env, void *priv_data) {}
