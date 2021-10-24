@@ -27,3 +27,5 @@ rayex-*.tar
 
 # NIFs
 /priv/
+
+/c_src/rayex/_generated/
