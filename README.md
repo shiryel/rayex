@@ -18,9 +18,12 @@ mix deps.get
 iex -S mix
 ```
 
-To test if you can open a new window with raylib run (on iex)`
-```bash
+Testing Rayex
+```elixir
+# open new window
 Rayex.init_window 200, 200, 'window name'
+
+# draw a line
 Rayex.begin_drawing
 Rayex.draw_line 10, 10, 50, 51, %{r: 255, g: 161, b: 0, a: 255}
 Rayex.end_drawing
@@ -30,7 +33,7 @@ Rayex.end_drawing
 
 There are a few things that you need to know about the code:
 * This project aims to run each one of [those functions](https://www.raylib.com/cheatsheet/cheatsheet.html) with elixir
-* To do so, we are using (Unifex)[https://hexdocs.pm/unifex/readme.html] to create NIFs
+* To do so, we are using [Unifex](https://hexdocs.pm/unifex/readme.html) to create NIFs
 
 Any contributions are appreciated
 
