@@ -7,7 +7,7 @@ defmodule Rayex.MixProject do
       version: "0.0.1",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      compilers: Mix.compilers() ++ [:raylib],
+      compilers: [:unifex, :bundlex] ++ Mix.compilers,
       deps: deps(),
       dialyzer: [plt_add_apps: [:mix]]
     ]
@@ -24,9 +24,12 @@ defmodule Rayex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      # CI
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+      # Deps
+      {:unifex, "~> 0.7.0"}
     ]
   end
 end
