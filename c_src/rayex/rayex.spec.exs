@@ -28,6 +28,7 @@ spec toggle_fullscreen() :: :ok :: label
 # Cursor-related functions
 
 # Drawing-related functions
+spec clear_background(color :: color) :: :ok :: label
 spec begin_drawing() :: :ok :: label
 spec end_drawing() :: :ok :: label
 
@@ -39,6 +40,10 @@ spec end_drawing() :: :ok :: label
 # Screen-space-related functions
 
 # Timing-related functions
+spec set_target_fps(fps :: int) :: :ok :: label
+spec get_fps() :: fps :: int
+spec get_frame_time() :: delta :: float
+spec get_time() :: time_from_start :: float
 
 # Misc. functions
 
@@ -58,6 +63,11 @@ spec end_drawing() :: :ok :: label
 # Input-related functions: gamepads
 
 # Input-related functions: mouse
+spec is_mouse_button_pressed(button :: int) :: result :: bool
+spec is_mouse_button_down(button :: int) :: result :: bool
+spec is_mouse_button_released(button :: int) :: result :: bool
+spec is_mouse_button_up(button :: int) :: result :: bool
+spec get_mouse_position() :: xy :: vector2
 
 # Input-related functions: touch
 
@@ -74,12 +84,15 @@ spec end_drawing() :: :ok :: label
 # defining a font char white rectangle would allow drawing everything in a single draw call
 spec set_shapes_texture(texture :: texture_2d, source :: rectangle) :: :ok :: label
 
+# Basic shapes drawing functions
 spec draw_pixel(x :: int, y :: int, color :: color) :: :ok :: label
 spec draw_line(start_x :: int, start_y :: int, end_x :: int, end_y :: int, color :: color) :: :ok :: label
-
-# Basic shapes drawing functions
+spec draw_rectangle_rec(rec :: rectangle, color :: color) :: :ok :: label
+spec draw_rectangle_lines_ex(rec :: rectangle, line_thick :: int, color :: color) :: :ok :: label
+spec draw_triangle(v1 :: vector2, v2 :: vector2, v3 :: vector2, color :: color) :: :ok :: label
 
 # Basic shapes collision detection functions
+spec check_collision_point_rec(point :: vector2, rec :: rectangle) :: result :: bool
 
 ############
 # TEXTURES #
@@ -111,6 +124,7 @@ spec draw_line(start_x :: int, start_y :: int, end_x :: int, end_y :: int, color
 # Font loading/unloading functions
 
 # Text drawing functions
+spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, color :: color) :: :ok :: label
 
 # Text misc. functions
 
