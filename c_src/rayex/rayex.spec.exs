@@ -1,7 +1,7 @@
 # Follows this refsheet:
 # https://www.raylib.com/cheatsheet/cheatsheet.html
 
-module Rayex
+module Rayex.Unifex.Raylib
 
 interface [NIF, CNode]
 
@@ -172,18 +172,19 @@ spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, col
 ###########
 # https://github.com/raysan5/raylib/blob/master/src/raylib.h
 
-type vector2 :: %Vector2{
+
+type vector2 :: %Rayex.Structs.Vector2{
   x: float,
   y: float
 }
 
-type vector3 :: %Vector3{
+type vector3 :: %Rayex.Structs.Vector3{
   x: float,
   y: float,
   z: float
 }
 
-type vector4 :: %Vector4{
+type vector4 :: %Rayex.Structs.Vector4{
   x: float,
   y: float,
   z: float,
@@ -191,14 +192,14 @@ type vector4 :: %Vector4{
 }
 
 # same as vector4
-type quaternion :: %Quaternion{
+type quaternion :: %Rayex.Structs.Quaternion{
   x: float,
   y: float,
   z: float,
   w: float
 }
 
-type matrix :: %Matrix{
+type matrix :: %Rayex.Structs.Matrix{
   m0: float,
   m1: float,
   m2: float,
@@ -220,21 +221,21 @@ type matrix :: %Matrix{
   m15: float
 }
 
-type color :: %Color{
+type color :: %Rayex.Structs.Color{
   r: unsigned,
   g: unsigned,
   b: unsigned,
   a: unsigned
 }
 
-type rectangle :: %Rectangle{
+type rectangle :: %Rayex.Structs.Rectangle{
   x: float,
   y: float,
   width: float,
   height: float
 }
 
-type image :: %Image{
+type image :: %Rayex.Structs.Image{
   # XXX: verify if payload works as a void*
   # take a look at https://hexdocs.pm/unifex/Unifex.Specs.DSL.html#spec/1-parameters
   data: payload,
@@ -244,7 +245,7 @@ type image :: %Image{
   format: int
 }
 
-type texture :: %Texture{
+type texture :: %Rayex.Structs.Texture{
   id: unsigned,
   width: float,
   height: float,
@@ -253,7 +254,7 @@ type texture :: %Texture{
 }
 
 # same as Texture
-type texture_2d :: %Texture2D{
+type texture_2d :: %Rayex.Structs.Texture2D{
   id: unsigned,
   width: float,
   height: float,
@@ -262,7 +263,7 @@ type texture_2d :: %Texture2D{
 }
 
 # same as Texture
-type texture_cubemap :: %TextureCubemap{
+type texture_cubemap :: %Rayex.Structs.TextureCubemap{
   id: unsigned,
   width: float,
   height: float,
@@ -270,20 +271,20 @@ type texture_cubemap :: %TextureCubemap{
   format: int
 }
 
-type render_texture :: %RenderTexture{
+type render_texture :: %Rayex.Structs.RenderTexture{
   id: unsigned,
   texture: texture,
   depth: texture
 }
 
 # same as render_texture
-type render_texture_2d :: %RenderTexture2D{
+type render_texture_2d :: %Rayex.Structs.RenderTexture2D{
   id: unsigned,
   texture: texture,
   depth: texture
 }
 
-type n_patch_info :: %NPatchInfo{
+type n_patch_info :: %Rayex.Structs.NPatchInfo{
   source: rectangle,
   left: int,
   top: int,
@@ -292,24 +293,24 @@ type n_patch_info :: %NPatchInfo{
   layout: int
 }
 
-type glyph_info :: %GlyphInfo{
+type glyph_info :: %Rayex.Structs.GlyphInfo{
   value: int,
-  offsetX: int,
-  offsetY: int,
-  advanceX: int,
+  offset_x: int,
+  offset_y: int,
+  advance_x: int,
   image: image
 }
 
-type font :: %Font{
-  baseSize: int,
-  glyphCount: int,
-  glyphPadding: int,
+type font :: %Rayex.Structs.Font{
+  base_size: int,
+  glyph_count: int,
+  glyph_padding: int,
   texture: texture,
   recs: [rectangle],
   glyphs: [glyph_info]
 }
 
-type camera_3d :: %Camera3D{
+type camera_3d :: %Rayex.Structs.Camera3D{
   position: vector3,
   target: vector3,
   up: vector3,
@@ -317,16 +318,16 @@ type camera_3d :: %Camera3D{
   projection: int,
 }
 
-type camera_2d :: %Camera2D{
+type camera_2d :: %Rayex.Structs.Camera2D{
   offset: vector2,
   target: vector2,
   rotation: float,
   zoom: float,
 }
 
-type mesh :: %Mesh{
-  vertexCount: int,
-  triangleCount: int,
+type mesh :: %Rayex.Structs.Mesh{
+  vertex_count: int,
+  triangle_count: int,
 
   # Vertex attributes data
   vertices: [float],
@@ -338,136 +339,136 @@ type mesh :: %Mesh{
   indices: [unsigned],
 
   # Animation vertex data
-  animVertices: [float],
-  animNormals: [float],
-  boneIds: [unsigned],
-  boneWeights: [float],
+  anim_vertices: [float],
+  anim_normals: [float],
+  bone_ids: [unsigned],
+  bone_weights: [float],
 
   # OpenGL identifiers
-  vaoId: [unsigned],
-  vboId: [unsigned]
+  vao_id: [unsigned],
+  vbo_id: [unsigned]
 }
 
-type shader :: %Shader{
+type shader :: %Rayex.Structs.Shader{
   id: unsigned,
   locs: [int]
 }
 
-type material_map :: %MaterialMap{
+type material_map :: %Rayex.Structs.MaterialMap{
   texture: texture_2d,
   color: color,
   value: float
 }
 
-type material :: %Material{
+type material :: %Rayex.Structs.Material{
   shader: shader,
   maps: [material_map],
   params: [float]
 }
 
-type transform :: %Transform{
+type transform :: %Rayex.Structs.Transform{
   translation: vector3,
   rotation: quaternion,
   scale: vector3
 }
 
-type bone_info :: %BoneInfo{
+type bone_info :: %Rayex.Structs.BoneInfo{
   name: string,
   parent: int
 }
 
-type model :: %Model{
+type model :: %Rayex.Structs.Model{
   transform: matrix,
 
-  meshCount: int,
-  materialCount: int,
+  mesh_count: int,
+  material_count: int,
   mashes: [mesh],
   materials: [material],
-  meshMaterial: [int],
+  mesh_material: [int],
 
-  boneCount: int,
+  bone_count: int,
   bones: [bone_info],
-  bindPose: [transform]
+  bind_pose: [transform]
 }
 
-type model_animation :: %ModelAnimation{
-  boneCount: int,
-  frameCount: int,
+type model_animation :: %Rayex.Structs.ModelAnimation{
+  bone_count: int,
+  frame_count: int,
   bones: [bone_info],
   # XXX: should be **transform
-  framePoses: [transform]
+  frame_poses: [transform]
 }
 
-type ray :: %Ray{
+type ray :: %Rayex.Structs.Ray{
   position: vector3,
   direction: vector3
 }
 
-type ray_collision :: %RayCollision{
+type ray_collision :: %Rayex.Structs.RayCollision{
   hit: bool,
   distance: float,
   point: vector3,
   normal: vector3
 }
 
-type bounding_box :: %BoundingBox{
+type bounding_box :: %Rayex.Structs.BoundingBox{
   min: vector3,
   max: vector3
 }
 
-type wave :: %Wave{
-  frameCount: unsigned,
-  sampleRate: unsigned,
-  sampleSize: unsigned,
+type wave :: %Rayex.Structs.Wave{
+  frame_count: unsigned,
+  sample_rate: unsigned,
+  sample_size: unsigned,
   channels: unsigned,
   data: payload,
 }
 
 # FIXME: ? https://github.com/raysan5/raylib/blob/master/src/raylib.h#L428
-type r_audio_buffer :: %RAudioBuffer{}
+type r_audio_buffer :: %Rayex.Structs.RAudioBuffer{}
 
-type audio_stream :: %AudioStream{
+type audio_stream :: %Rayex.Structs.AudioStream{
   buffer: [r_audio_buffer],
 
-  sampleRate: unsigned,
-  sampleSize: unsigned,
+  sample_rate: unsigned,
+  sample_size: unsigned,
   channels: unsigned
 }
 
-type sound :: %Sound{
+type sound :: %Rayex.Structs.Sound{
   stream: audio_stream,
-  frameCount: unsigned
+  frame_count: unsigned
 }
 
-type music :: %Music{
+type music :: %Rayex.Structs.Music{
   stream: audio_stream,
-  frameCount: unsigned,
+  frame_count: unsigned,
   looping: bool,
 
-  ctxType: int,
-  ctxData: payload
+  ctx_type: int,
+  ctx_data: payload
 }
 
-type vr_device_info :: %VrDeviceInfo{
-  hResolution: int,
-  vResolution: int,
-  hScreenSize: float,
-  vScreenSize: float,
-  vScreenCenter: float,
-  eyeToScreenDistance: float,
-  lensSeparationDistance: float,
-  interpupillaryDistance: float,
-  lensDistortionValues: [float],
-  chromaAbCorrection: [float]
+type vr_device_info :: %Rayex.Structs.VrDeviceInfo{
+  h_resolution: int,
+  v_resolution: int,
+  h_screen_size: float,
+  v_screen_size: float,
+  v_screen_center: float,
+  eye_to_screen_distance: float,
+  lensSeparation_distance: float,
+  interpupillary_distance: float,
+  lens_distortion_values: [float],
+  chroma_ab_correction: [float]
 }
 
-type vr_stereo_config :: %VrStereoConfig{
+type vr_stereo_config :: %Rayex.Structs.VrStereoConfig{
   projection: [matrix],
-  viewOffset: [matrix],
-  leftLensCenter: [float],
-  rightLensCenter: [float],
-  leftScreenCenter: [float],
-  rightScreenCenter: [float],
+  view_offset: [matrix],
+  left_lens_center: [float],
+  right_lens_center: [float],
+  left_screen_center: [float],
+  right_screen_center: [float],
   scale: [float],
-  scaleIn: [float]
+  scale_in: [float]
 }

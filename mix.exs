@@ -9,7 +9,11 @@ defmodule Rayex.MixProject do
       start_permanent: Mix.env() == :prod,
       compilers: [:unifex, :bundlex] ++ Mix.compilers,
       deps: deps(),
-      dialyzer: [plt_add_apps: [:mix]]
+      dialyzer: [plt_add_apps: [:mix]],
+      docs: fn ->
+        {result, _} = Code.eval_file("docs.exs")
+        result
+      end
     ]
   end
 
@@ -17,7 +21,6 @@ defmodule Rayex.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Rayex.Application, []}
     ]
   end
 
