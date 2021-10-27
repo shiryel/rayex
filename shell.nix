@@ -36,8 +36,7 @@ in pkgs.mkShell {
       unstable_pkgs.buildPackages.binutils
       unstable_pkgs.buildPackages.pkg-config
       unstable_pkgs.buildPackages.clang-tools
-      # LSP
-      unstable_pkgs.buildPackages.clang_9
-      unstable_pkgs.buildPackages.bear
+      # clang-format
+      unstable_pkgs.buildPackages.clang_12
     ];
 }

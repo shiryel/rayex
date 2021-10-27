@@ -83,7 +83,7 @@ defmodule Rayex.Core do
 
   # Screen-space-related functions
   @doc "Get a ray trace from mouse position"
-  @spec get_mouse_ray(S.Vector2.t, S.Color.t) :: S.Ray.t
+  @spec get_mouse_ray(S.Vector2.t(), S.Color.t()) :: S.Ray.t()
   defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
   # Timing-related functions
