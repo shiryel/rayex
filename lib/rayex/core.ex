@@ -82,6 +82,9 @@ defmodule Rayex.Core do
   # NOTE: Shader functionality is not available on OpenGL 1.1
 
   # Screen-space-related functions
+  @doc "Get a ray trace from mouse position"
+  @spec get_mouse_ray(S.Vector2.t, S.Color.t) :: S.Ray.t
+  defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
   # Timing-related functions
 
@@ -145,4 +148,36 @@ defmodule Rayex.Core do
   # Gestures and Touch Handling Functions (Module: rgestures)
 
   # Camera System Functions (Module: rcamera)
+  # @doc "Set camera mode (multiple camera modes available)"
+  # @spec set_camera_mode(S.Camera.t, integer()) :: integer()
+  # defdelegate set_camera_mode(camera, mode), to: Raylib
+
+  # @doc "Update camera position for selected mode"
+  # @spec set_camera_mode(integer(), S.Camera.t) :: :ok
+  # defdelegate update_camera(camera_id, camera), to: Raylib
+
+  @doc "Set camera pan key to combine with mouse movement (free camera)"
+  @spec set_camera_pan_control(integer()) :: :ok
+  defdelegate set_camera_pan_control(key_pan), to: Raylib
+
+  @doc "Set camera alt key to combine with mouse movement (free camera)"
+  @spec set_camera_alt_control(integer()) :: :ok
+  defdelegate set_camera_alt_control(key_alt), to: Raylib
+
+  @doc "Set camera smooth zoom key to combine with mouse (free camera)"
+  @spec set_camera_smooth_zoom_control(integer()) :: :ok
+  defdelegate set_camera_smooth_zoom_control(key_smooth_zoom), to: Raylib
+
+  @doc "Set camera move controls (1st person and 3rd person cameras)"
+  @spec set_camera_move_controls(integer(), integer(), integer(), integer(), integer(), integer()) ::
+          :ok
+  defdelegate set_camera_move_controls(
+                key_front,
+                key_back,
+                key_right,
+                key_left,
+                key_up,
+                key_down
+              ),
+              to: Raylib
 end
