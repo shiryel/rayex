@@ -5,22 +5,11 @@ on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
-    container: arch:latest
-
-    strategy:
-      matrix:
-        otp: ['22.3', '23.3', '24.0']
-        elixir: ['1.12.0', '1.12.2']
+    container: archlinux:base-devel
 
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
-
-    - name: Setup OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
-      uses: erlef/setup-beam@v1
-      with:
-        otp-version: ${{matrix.otp}}
-        elixir-version: ${{matrix.elixir}}
 
     - name: Get Deps Cache
       uses: actions/cache@v2
@@ -33,12 +22,12 @@ jobs:
       uses: actions/cache@v2
       with:
         path: _build/
-        key: ${{runner.os}}-${{matrix.otp}}-${{matrix.elixir}}-${{hashFiles('mix.lock')}}-build
+        key: ${{runner.os}}-${{hashFiles('mix.lock')}}-build
 
     - name: Get deps
       if: steps.cache-deps.outputs.cache-hit != 'true'
       run: | 
-        sudo pacman -Sy raylib pkg-config
+        pacman --noconfirm -Sy elixir raylib git clang pkg-config
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
