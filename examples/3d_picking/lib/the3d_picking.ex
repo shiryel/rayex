@@ -33,14 +33,14 @@ defmodule The3dPicking do
     game_loop(%{camera: camera, camera_id: camera_id, hit?: false})
   end
 
-  defp game_loop(%{camera: camera, camera_id: camera_id, hit?: hit?} = state) do
+  defp game_loop(%{camera: camera, hit?: hit?} = state) do
     Logger.debug(inspect(camera))
 
     ray = get_mouse_position() |> get_mouse_ray(camera)
 
     hit? =
       if mouse_button_pressed?(@mouse_left) do
-        !hit? && check_hit(ray, camera)
+        !hit? && check_hit(ray)
       else
         hit?
       end
@@ -82,7 +82,7 @@ defmodule The3dPicking do
     (window_should_close() && close_window()) || game_loop(state)
   end
 
-  defp check_hit(ray, camera) do
+  defp check_hit(ray) do
     collision =
       get_ray_collision_box(
         ray,
