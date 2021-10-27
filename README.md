@@ -7,6 +7,20 @@ Rayex provides Elixir NIF bindings to [Raylib](https://www.raylib.com/)
 
 ![](examples/3d_picking.gif)
 
+## Installation
+
+The package can be installed by adding `rayex` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:rayex, "~> 0.0.1"}
+  ]
+end
+```
+
+The docs can be found at [https://hexdocs.pm/rayex](https://hexdocs.pm/rayex).
+
 ## How to run
 
 You need the following deps installed on your system:
