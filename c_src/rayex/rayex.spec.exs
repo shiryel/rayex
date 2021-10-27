@@ -81,7 +81,15 @@ spec update_camera(camera_id :: ulong, camera :: camera_3d) :: :ok :: label
 spec set_camera_pan_control(key_pan :: int) :: :ok :: label
 spec set_camera_alt_control(key_alt :: int) :: :ok :: label
 spec set_camera_smooth_zoom_control(key_smooth_zoom :: int) :: :ok :: label
-spec set_camera_move_controls(key_front :: int, key_back :: int, key_right :: int, key_left :: int, key_up :: int, key_down :: int) :: :ok :: label
+
+spec set_camera_move_controls(
+       key_front :: int,
+       key_back :: int,
+       key_right :: int,
+       key_left :: int,
+       key_up :: int,
+       key_down :: int
+     ) :: :ok :: label
 
 ##########
 # SHAPES #
@@ -94,7 +102,10 @@ spec set_shapes_texture(texture :: texture_2d, source :: rectangle) :: :ok :: la
 
 # Basic shapes drawing functions
 spec draw_pixel(x :: int, y :: int, color :: color) :: :ok :: label
-spec draw_line(start_x :: int, start_y :: int, end_x :: int, end_y :: int, color :: color) :: :ok :: label
+
+spec draw_line(start_x :: int, start_y :: int, end_x :: int, end_y :: int, color :: color) ::
+       :ok :: label
+
 spec draw_rectangle_rec(rec :: rectangle, color :: color) :: :ok :: label
 spec draw_rectangle_lines_ex(rec :: rectangle, line_thick :: int, color :: color) :: :ok :: label
 spec draw_triangle(v1 :: vector2, v2 :: vector2, v3 :: vector2, color :: color) :: :ok :: label
@@ -133,7 +144,8 @@ spec get_ray_collision_box(ray :: ray, box :: bounding_box) :: ray_collision :: 
 # Font loading/unloading functions
 
 # Text drawing functions
-spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, color :: color) :: :ok :: label
+spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, color :: color) ::
+       :ok :: label
 
 # Text misc. functions
 
@@ -181,303 +193,298 @@ spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, col
 ###########
 # https://github.com/raysan5/raylib/blob/master/src/raylib.h
 
-
 type vector2 :: %Rayex.Structs.Vector2{
-  x: float,
-  y: float
-}
+       x: float,
+       y: float
+     }
 
 type vector3 :: %Rayex.Structs.Vector3{
-  x: float,
-  y: float,
-  z: float
-}
+       x: float,
+       y: float,
+       z: float
+     }
 
 type vector4 :: %Rayex.Structs.Vector4{
-  x: float,
-  y: float,
-  z: float,
-  w: float
-}
+       x: float,
+       y: float,
+       z: float,
+       w: float
+     }
 
 # same as vector4
 type quaternion :: %Rayex.Structs.Quaternion{
-  x: float,
-  y: float,
-  z: float,
-  w: float
-}
+       x: float,
+       y: float,
+       z: float,
+       w: float
+     }
 
 type matrix :: %Rayex.Structs.Matrix{
-  m0: float,
-  m1: float,
-  m2: float,
-  m3: float,
-  #
-  m4: float,
-  m5: float,
-  m6: float,
-  m7: float,
-  #
-  m8: float,
-  m9: float,
-  m10: float,
-  m11: float,
-  #
-  m12: float,
-  m13: float,
-  m14: float,
-  m15: float
-}
+       m0: float,
+       m1: float,
+       m2: float,
+       m3: float,
+       #
+       m4: float,
+       m5: float,
+       m6: float,
+       m7: float,
+       #
+       m8: float,
+       m9: float,
+       m10: float,
+       m11: float,
+       #
+       m12: float,
+       m13: float,
+       m14: float,
+       m15: float
+     }
 
 type color :: %Rayex.Structs.Color{
-  r: unsigned,
-  g: unsigned,
-  b: unsigned,
-  a: unsigned
-}
+       r: unsigned,
+       g: unsigned,
+       b: unsigned,
+       a: unsigned
+     }
 
 type rectangle :: %Rayex.Structs.Rectangle{
-  x: float,
-  y: float,
-  width: float,
-  height: float
-}
+       x: float,
+       y: float,
+       width: float,
+       height: float
+     }
 
 type image :: %Rayex.Structs.Image{
-  # XXX: verify if payload works as a void*
-  # take a look at https://hexdocs.pm/unifex/Unifex.Specs.DSL.html#spec/1-parameters
-  data: payload,
-  width: int,
-  height: int,
-  mipmaps: int,
-  format: int
-}
+       # XXX: verify if payload works as a void*
+       # take a look at https://hexdocs.pm/unifex/Unifex.Specs.DSL.html#spec/1-parameters
+       data: payload,
+       width: int,
+       height: int,
+       mipmaps: int,
+       format: int
+     }
 
 type texture :: %Rayex.Structs.Texture{
-  id: unsigned,
-  width: float,
-  height: float,
-  mipmaps: int,
-  format: int
-}
+       id: unsigned,
+       width: float,
+       height: float,
+       mipmaps: int,
+       format: int
+     }
 
 # same as Texture
 type texture_2d :: %Rayex.Structs.Texture2D{
-  id: unsigned,
-  width: float,
-  height: float,
-  mipmaps: int,
-  format: int
-}
+       id: unsigned,
+       width: float,
+       height: float,
+       mipmaps: int,
+       format: int
+     }
 
 # same as Texture
 type texture_cubemap :: %Rayex.Structs.TextureCubemap{
-  id: unsigned,
-  width: float,
-  height: float,
-  mipmaps: int,
-  format: int
-}
+       id: unsigned,
+       width: float,
+       height: float,
+       mipmaps: int,
+       format: int
+     }
 
 type render_texture :: %Rayex.Structs.RenderTexture{
-  id: unsigned,
-  texture: texture,
-  depth: texture
-}
+       id: unsigned,
+       texture: texture,
+       depth: texture
+     }
 
 # same as render_texture
 type render_texture_2d :: %Rayex.Structs.RenderTexture2D{
-  id: unsigned,
-  texture: texture,
-  depth: texture
-}
+       id: unsigned,
+       texture: texture,
+       depth: texture
+     }
 
 type n_patch_info :: %Rayex.Structs.NPatchInfo{
-  source: rectangle,
-  left: int,
-  top: int,
-  right: int,
-  bottom: int,
-  layout: int
-}
+       source: rectangle,
+       left: int,
+       top: int,
+       right: int,
+       bottom: int,
+       layout: int
+     }
 
 type glyph_info :: %Rayex.Structs.GlyphInfo{
-  value: int,
-  offset_x: int,
-  offset_y: int,
-  advance_x: int,
-  image: image
-}
+       value: int,
+       offset_x: int,
+       offset_y: int,
+       advance_x: int,
+       image: image
+     }
 
 type font :: %Rayex.Structs.Font{
-  base_size: int,
-  glyph_count: int,
-  glyph_padding: int,
-  texture: texture,
-  recs: [rectangle],
-  glyphs: [glyph_info]
-}
+       base_size: int,
+       glyph_count: int,
+       glyph_padding: int,
+       texture: texture,
+       recs: [rectangle],
+       glyphs: [glyph_info]
+     }
 
 type camera_3d :: %Rayex.Structs.Camera3D{
-  position: vector3,
-  target: vector3,
-  up: vector3,
-  fovy: float,
-  projection: int,
-}
+       position: vector3,
+       target: vector3,
+       up: vector3,
+       fovy: float,
+       projection: int
+     }
 
 type camera_2d :: %Rayex.Structs.Camera2D{
-  offset: vector2,
-  target: vector2,
-  rotation: float,
-  zoom: float,
-}
+       offset: vector2,
+       target: vector2,
+       rotation: float,
+       zoom: float
+     }
 
 type mesh :: %Rayex.Structs.Mesh{
-  vertex_count: int,
-  triangle_count: int,
+       vertex_count: int,
+       triangle_count: int,
 
-  # Vertex attributes data
-  vertices: [float],
-  texcoords: [float],
-  texcoords2: [float],
-  normals: [float],
-  tangents: [float],
-  colors: [unsigned],
-  indices: [unsigned],
+       # Vertex attributes data
+       vertices: [float],
+       texcoords: [float],
+       texcoords2: [float],
+       normals: [float],
+       tangents: [float],
+       colors: [unsigned],
+       indices: [unsigned],
 
-  # Animation vertex data
-  anim_vertices: [float],
-  anim_normals: [float],
-  bone_ids: [unsigned],
-  bone_weights: [float],
+       # Animation vertex data
+       anim_vertices: [float],
+       anim_normals: [float],
+       bone_ids: [unsigned],
+       bone_weights: [float],
 
-  # OpenGL identifiers
-  vao_id: [unsigned],
-  vbo_id: [unsigned]
-}
+       # OpenGL identifiers
+       vao_id: [unsigned],
+       vbo_id: [unsigned]
+     }
 
 type shader :: %Rayex.Structs.Shader{
-  id: unsigned,
-  locs: [int]
-}
+       id: unsigned,
+       locs: [int]
+     }
 
 type material_map :: %Rayex.Structs.MaterialMap{
-  texture: texture_2d,
-  color: color,
-  value: float
-}
+       texture: texture_2d,
+       color: color,
+       value: float
+     }
 
 type material :: %Rayex.Structs.Material{
-  shader: shader,
-  maps: [material_map],
-  params: [float]
-}
+       shader: shader,
+       maps: [material_map],
+       params: [float]
+     }
 
 type transform :: %Rayex.Structs.Transform{
-  translation: vector3,
-  rotation: quaternion,
-  scale: vector3
-}
+       translation: vector3,
+       rotation: quaternion,
+       scale: vector3
+     }
 
 type bone_info :: %Rayex.Structs.BoneInfo{
-  name: string,
-  parent: int
-}
+       name: string,
+       parent: int
+     }
 
 type model :: %Rayex.Structs.Model{
-  transform: matrix,
-
-  mesh_count: int,
-  material_count: int,
-  mashes: [mesh],
-  materials: [material],
-  mesh_material: [int],
-
-  bone_count: int,
-  bones: [bone_info],
-  bind_pose: [transform]
-}
+       transform: matrix,
+       mesh_count: int,
+       material_count: int,
+       mashes: [mesh],
+       materials: [material],
+       mesh_material: [int],
+       bone_count: int,
+       bones: [bone_info],
+       bind_pose: [transform]
+     }
 
 type model_animation :: %Rayex.Structs.ModelAnimation{
-  bone_count: int,
-  frame_count: int,
-  bones: [bone_info],
-  # XXX: should be **transform
-  frame_poses: [transform]
-}
+       bone_count: int,
+       frame_count: int,
+       bones: [bone_info],
+       # XXX: should be **transform
+       frame_poses: [transform]
+     }
 
 type ray :: %Rayex.Structs.Ray{
-  position: vector3,
-  direction: vector3
-}
+       position: vector3,
+       direction: vector3
+     }
 
 type ray_collision :: %Rayex.Structs.RayCollision{
-  hit: bool,
-  distance: float,
-  point: vector3,
-  normal: vector3
-}
+       hit: bool,
+       distance: float,
+       point: vector3,
+       normal: vector3
+     }
 
 type bounding_box :: %Rayex.Structs.BoundingBox{
-  min: vector3,
-  max: vector3
-}
+       min: vector3,
+       max: vector3
+     }
 
 type wave :: %Rayex.Structs.Wave{
-  frame_count: unsigned,
-  sample_rate: unsigned,
-  sample_size: unsigned,
-  channels: unsigned,
-  data: payload,
-}
+       frame_count: unsigned,
+       sample_rate: unsigned,
+       sample_size: unsigned,
+       channels: unsigned,
+       data: payload
+     }
 
 # FIXME: ? https://github.com/raysan5/raylib/blob/master/src/raylib.h#L428
 type r_audio_buffer :: %Rayex.Structs.RAudioBuffer{}
 
 type audio_stream :: %Rayex.Structs.AudioStream{
-  buffer: [r_audio_buffer],
-
-  sample_rate: unsigned,
-  sample_size: unsigned,
-  channels: unsigned
-}
+       buffer: [r_audio_buffer],
+       sample_rate: unsigned,
+       sample_size: unsigned,
+       channels: unsigned
+     }
 
 type sound :: %Rayex.Structs.Sound{
-  stream: audio_stream,
-  frame_count: unsigned
-}
+       stream: audio_stream,
+       frame_count: unsigned
+     }
 
 type music :: %Rayex.Structs.Music{
-  stream: audio_stream,
-  frame_count: unsigned,
-  looping: bool,
-
-  ctx_type: int,
-  ctx_data: payload
-}
+       stream: audio_stream,
+       frame_count: unsigned,
+       looping: bool,
+       ctx_type: int,
+       ctx_data: payload
+     }
 
 type vr_device_info :: %Rayex.Structs.VrDeviceInfo{
-  h_resolution: int,
-  v_resolution: int,
-  h_screen_size: float,
-  v_screen_size: float,
-  v_screen_center: float,
-  eye_to_screen_distance: float,
-  lensSeparation_distance: float,
-  interpupillary_distance: float,
-  lens_distortion_values: [float],
-  chroma_ab_correction: [float]
-}
+       h_resolution: int,
+       v_resolution: int,
+       h_screen_size: float,
+       v_screen_size: float,
+       v_screen_center: float,
+       eye_to_screen_distance: float,
+       lensSeparation_distance: float,
+       interpupillary_distance: float,
+       lens_distortion_values: [float],
+       chroma_ab_correction: [float]
+     }
 
 type vr_stereo_config :: %Rayex.Structs.VrStereoConfig{
-  projection: [matrix],
-  view_offset: [matrix],
-  left_lens_center: [float],
-  right_lens_center: [float],
-  left_screen_center: [float],
-  right_screen_center: [float],
-  scale: [float],
-  scale_in: [float]
-}
+       projection: [matrix],
+       view_offset: [matrix],
+       left_lens_center: [float],
+       right_lens_center: [float],
+       left_screen_center: [float],
+       right_screen_center: [float],
+       scale: [float],
+       scale_in: [float]
+     }

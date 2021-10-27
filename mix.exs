@@ -7,7 +7,7 @@ defmodule Rayex.MixProject do
       version: "0.0.1",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      compilers: [:unifex, :bundlex] ++ Mix.compilers,
+      compilers: [:unifex, :bundlex] ++ Mix.compilers(),
       deps: deps(),
       dialyzer: [plt_add_apps: [:mix]],
       docs: fn ->
@@ -20,7 +20,7 @@ defmodule Rayex.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger]
     ]
   end
 
