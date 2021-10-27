@@ -1,9 +1,11 @@
 # Rayex
 
-> Warning: \
-> WIP, many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help
+Rayex provides Elixir NIF bindings to [Raylib](https://www.raylib.com/)
 
-Rayex is an (almost) 1 to 1 binding with [raylib](https://www.raylib.com/)
+> WIP: many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help \
+> NOTE: We are developing for the raylib 4.0-dev (that is why the CI is not passing right now, but you can use `make test` to test)
+
+![](examples/3d_picking.gif)
 
 ## How to run
 
