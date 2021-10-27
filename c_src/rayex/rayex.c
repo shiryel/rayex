@@ -106,11 +106,22 @@
               .fovy = c.fovy,                                                  \
               .projection = c.projection})
 #define E_CAMERA3D(c)                                                          \
-  ((camera_3d){.position = VECTOR3(c.position),                                \
-               .target = VECTOR3(c.target),                                    \
-               .up = VECTOR3(c.up),                                            \
+  ((camera_3d){.position = E_VECTOR3(c.position),                              \
+               .target = E_VECTOR3(c.target),                                  \
+               .up = E_VECTOR3(c.up),                                          \
                .fovy = c.fovy,                                                 \
                .projection = c.projection})
+
+#define CAMERA2D(c)                                                            \
+  ((Camera2D){.offset = VECTOR2(c.offset),                                     \
+              .target = VECTOR2(c.target),                                     \
+              .rotation = c.rotation,                                          \
+              .zoom = c.zoom})
+#define E_CAMERA2D(c)                                                          \
+  ((camera_2d){.offset = E_VECTOR2(c.offset),                                  \
+               .target = E_VECTOR2(c.target),                                  \
+               .rotation = c.rotation,                                         \
+               .zoom = c.zoom})
 
 #define RAY(v)                                                                 \
   ((Ray){.position = VECTOR3(v.position), .direction = VECTOR3(v.direction)})
@@ -229,6 +240,26 @@ UNIFEX_TERM end_drawing(UnifexEnv *env) {
   return end_drawing_result_ok(env);
 }
 
+UNIFEX_TERM begin_mode_2d(UnifexEnv *env, camera_2d c) {
+  BeginMode2D(CAMERA2D(c));
+  return begin_mode_2d_result_ok(env);
+}
+
+UNIFEX_TERM end_mode_2d(UnifexEnv *env) {
+  EndMode2D();
+  return end_mode_2d_result_ok(env);
+}
+
+UNIFEX_TERM begin_mode_3d(UnifexEnv *env, camera_3d c) {
+  BeginMode3D(CAMERA3D(c));
+  return begin_mode_3d_result_ok(env);
+}
+
+UNIFEX_TERM end_mode_3d(UnifexEnv *env) {
+  EndMode3D();
+  return end_mode_3d_result_ok(env);
+}
+
 // VR stereo config functions for VR simulator
 
 // Shader management functions
@@ -318,15 +349,10 @@ UNIFEX_TERM set_camera_mode(UnifexEnv *env, camera_3d c, int mode) {
   return set_camera_mode_result(env, res);
 }
 
-UNIFEX_TERM update_camera(UnifexEnv *env, uintptr_t camera_id, camera_3d c) {
-  Camera3D *camera_ptr = (Camera3D *)camera_id;
-  camera_ptr->position = VECTOR3(c.position);
-  camera_ptr->target = VECTOR3(c.target);
-  camera_ptr->up = VECTOR3(c.up);
-  camera_ptr->fovy = c.fovy;
-  camera_ptr->projection = c.projection;
-  UpdateCamera(camera_ptr);
-  return update_camera_result_ok(env);
+UNIFEX_TERM update_camera(UnifexEnv *env, camera_3d c) {
+  Camera3D camera = CAMERA3D(c);
+  UpdateCamera(&camera);
+  return update_camera_result(env, E_CAMERA3D(camera));
 }
 
 UNIFEX_TERM set_camera_pan_control(UnifexEnv *env, int key_pan) {
@@ -441,6 +467,11 @@ UNIFEX_TERM get_ray_collision_box(UnifexEnv *env, ray r, bounding_box b) {
 
 // Text drawing functions
 
+UNIFEX_TERM draw_fps(UnifexEnv *env, int posX, int posY) {
+  DrawFPS(posX, posY);
+  return draw_fps_result_ok(env);
+}
+
 UNIFEX_TERM draw_text(UnifexEnv *env, char *text, int posX, int posY,
                       int fontSize, color c) {
   DrawText(text, posX, posY, fontSize, COLOR(c));
@@ -460,6 +491,28 @@ UNIFEX_TERM draw_text(UnifexEnv *env, char *text, int posX, int posY,
  **********/
 
 // Basic geometric 3D shapes drawing functions
+
+UNIFEX_TERM draw_cube(UnifexEnv *env, vector3 p, double width, double height,
+                      double length, color c) {
+  DrawCube(VECTOR3(p), width, height, length, COLOR(c));
+  return draw_cube_result_ok(env);
+}
+
+UNIFEX_TERM draw_cube_wires(UnifexEnv *env, vector3 p, double width,
+                            double height, double length, color c) {
+  DrawCubeWires(VECTOR3(p), width, height, length, COLOR(c));
+  return draw_cube_wires_result_ok(env);
+}
+
+UNIFEX_TERM draw_ray(UnifexEnv *env, ray r, color c) {
+  DrawRay(RAY(r), COLOR(c));
+  return draw_ray_result_ok(env);
+}
+
+UNIFEX_TERM draw_grid(UnifexEnv *env, int slices, double spacing) {
+  DrawGrid(slices, spacing);
+  return draw_grid_result_ok(env);
+}
 
 // Model loading/unloading functions
 

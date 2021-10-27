@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
+    container: arch:latest
 
     strategy:
       matrix:
@@ -20,7 +21,7 @@ jobs:
       with:
         otp-version: ${{matrix.otp}}
         elixir-version: ${{matrix.elixir}}
-      
+
     - name: Get Deps Cache
       uses: actions/cache@v2
       id: cache-deps
@@ -37,6 +38,7 @@ jobs:
     - name: Get deps
       if: steps.cache-deps.outputs.cache-hit != 'true'
       run: | 
+        sudo pacman -Sy raylib pkg-config
         mix local.rebar --force
         mix local.hex --force
         mix deps.get

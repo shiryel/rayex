@@ -1,4 +1,8 @@
 defmodule Rayex.Textures do
+  @moduledoc """
+    Texture related functions
+  """
+
   # Image loading functions
   # NOTE: This functions do not require GPU access
 

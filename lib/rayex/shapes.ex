@@ -1,6 +1,10 @@
 defmodule Rayex.Shapes do
-  alias Rayex.Unifex.Raylib
+  @moduledoc """
+    Shapes related functions
+  """
+
   alias Rayex.Structs, as: S
+  alias Rayex.Unifex.Raylib
 
   # Set texture and rectangle to be used on shapes drawing
   # NOTE: It can be useful when using basic shapes and one single font,

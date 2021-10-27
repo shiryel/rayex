@@ -31,6 +31,10 @@ spec toggle_fullscreen() :: :ok :: label
 spec clear_background(color :: color) :: :ok :: label
 spec begin_drawing() :: :ok :: label
 spec end_drawing() :: :ok :: label
+spec begin_mode_2d(camera_2d :: camera_2d) :: :ok :: label
+spec end_mode_2d() :: :ok :: label
+spec begin_mode_3d(camera_3d :: camera_3d) :: :ok :: label
+spec end_mode_3d() :: :ok :: label
 
 # VR stereo config functions for VR simulator
 
@@ -76,7 +80,7 @@ spec get_mouse_position() :: xy :: vector2
 
 # Camera System Functions (Module: rcamera)
 spec set_camera_mode(camera :: camera_3d, mode :: int) :: camera_id :: ulong
-spec update_camera(camera_id :: ulong, camera :: camera_3d) :: :ok :: label
+spec update_camera(camera :: camera_3d) :: camera :: camera_3d
 
 spec set_camera_pan_control(key_pan :: int) :: :ok :: label
 spec set_camera_alt_control(key_alt :: int) :: :ok :: label
@@ -144,6 +148,8 @@ spec get_ray_collision_box(ray :: ray, box :: bounding_box) :: ray_collision :: 
 # Font loading/unloading functions
 
 # Text drawing functions
+spec draw_fps(pos_x :: int, pos_y :: int) :: :ok :: label
+
 spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, color :: color) ::
        :ok :: label
 
@@ -159,6 +165,24 @@ spec draw_text(text :: string, pos_x :: int, pos_y :: int, font_size :: int, col
 ##########
 
 # Basic geometric 3D shapes drawing functions
+spec draw_cube(
+       position :: vector3,
+       width :: float,
+       height :: float,
+       length :: float,
+       color :: color
+     ) :: :ok :: label
+
+spec draw_cube_wires(
+       position :: vector3,
+       width :: float,
+       height :: float,
+       length :: float,
+       color :: color
+     ) :: :ok :: label
+
+spec draw_ray(ray :: ray, color :: color) :: :ok :: label
+spec draw_grid(slices :: int, spacing :: float) :: :ok :: label
 
 # Model loading/unloading functions
 
