@@ -47,7 +47,7 @@ alias Rayex.{Audio, Core, Models, Shapes, Structs, Text, Textures}
       Structs.RenderTexture2D,
       Structs.Shader,
       Structs.Sound,
-      Structs.Texture,
+      Structs.Texture2D,
       Structs.TextureCubemap,
       Structs.Transform,
       Structs.Vector2,

@@ -1,8 +1,6 @@
 defmodule Unifex.CodeGenerator.BaseTypes.Ulong do
-  @moduledoc """
-  Module implementing `Unifex.CodeGenerator.BaseType` behaviour for floats.
-  Implemented both for NIF and CNode as function parameter as well as return type.
-  """
+  @moduledoc false
+
   alias Unifex.CodeGenerator.BaseType
   use BaseType
 
