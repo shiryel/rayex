@@ -1,6 +1,10 @@
 defmodule Rayex.Core do
-  alias Rayex.Unifex.Raylib
+  @moduledoc """
+    Main functions
+  """
+
   alias Rayex.Structs, as: S
+  alias Rayex.Unifex.Raylib
 
   # Window-related functions
 
@@ -86,6 +90,22 @@ defmodule Rayex.Core do
   @spec get_mouse_ray(S.Vector2.t(), S.Color.t()) :: S.Ray.t()
   defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
+  @doc "Begin 2D mode with custom camera (2D)"
+  @spec begin_mode_2d(S.Camera2D.t()) :: :ok
+  defdelegate begin_mode_2d(camera_2d), to: Raylib
+
+  @doc "Ends 2D mode with custom camera"
+  @spec end_mode_2d() :: :ok
+  defdelegate end_mode_2d, to: Raylib
+
+  @doc "Begin 3D mode with custom camera (3D)"
+  @spec begin_mode_3d(S.Camera3D.t()) :: :ok
+  defdelegate begin_mode_3d(camera_3d), to: Raylib
+
+  @doc "Ends 3D mode and returns to default 2D orthographic mode"
+  @spec end_mode_3d() :: :ok
+  defdelegate end_mode_3d, to: Raylib
+
   # Timing-related functions
 
   @doc "Set target FPS (maximum)"
@@ -148,13 +168,14 @@ defmodule Rayex.Core do
   # Gestures and Touch Handling Functions (Module: rgestures)
 
   # Camera System Functions (Module: rcamera)
-  # @doc "Set camera mode (multiple camera modes available)"
-  # @spec set_camera_mode(S.Camera.t, integer()) :: integer()
-  # defdelegate set_camera_mode(camera, mode), to: Raylib
 
-  # @doc "Update camera position for selected mode"
-  # @spec set_camera_mode(integer(), S.Camera.t) :: :ok
-  # defdelegate update_camera(camera_id, camera), to: Raylib
+  @doc "Set camera mode (multiple camera modes available)"
+  @spec set_camera_mode(S.Camera3D.t(), integer()) :: integer()
+  defdelegate set_camera_mode(camera_3d, mode), to: Raylib
+
+  @doc "Update camera position for selected mode"
+  @spec update_camera(S.Camera3D.t()) :: S.Camera3D.t()
+  defdelegate update_camera(camera_3d), to: Raylib
 
   @doc "Set camera pan key to combine with mouse movement (free camera)"
   @spec set_camera_pan_control(integer()) :: :ok

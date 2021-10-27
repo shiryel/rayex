@@ -32,7 +32,8 @@ defmodule Rayex.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       # Deps
-      {:unifex, "~> 0.7.0"}
+      {:unifex, "~> 0.7.0"},
+      {:bundlex, git: "https://github.com/shiryel/bundlex", branch: "master", override: true}
     ]
   end
 end
