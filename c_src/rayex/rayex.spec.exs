@@ -38,6 +38,7 @@ spec end_drawing() :: :ok :: label
 # NOTE: Shader functionality is not available on OpenGL 1.1
 
 # Screen-space-related functions
+spec get_mouse_ray(mouse_position :: vector2, camera :: camera_3d) :: ray :: ray
 
 # Timing-related functions
 spec set_target_fps(fps :: int) :: :ok :: label
@@ -74,6 +75,13 @@ spec get_mouse_position() :: xy :: vector2
 # Gestures and Touch Handling Functions (Module: rgestures)
 
 # Camera System Functions (Module: rcamera)
+spec set_camera_mode(camera :: camera_3d, mode :: int) :: camera_id :: ulong
+spec update_camera(camera_id :: ulong, camera :: camera_3d) :: :ok :: label
+
+spec set_camera_pan_control(key_pan :: int) :: :ok :: label
+spec set_camera_alt_control(key_alt :: int) :: :ok :: label
+spec set_camera_smooth_zoom_control(key_smooth_zoom :: int) :: :ok :: label
+spec set_camera_move_controls(key_front :: int, key_back :: int, key_right :: int, key_left :: int, key_up :: int, key_down :: int) :: :ok :: label
 
 ##########
 # SHAPES #
@@ -93,6 +101,7 @@ spec draw_triangle(v1 :: vector2, v2 :: vector2, v3 :: vector2, color :: color) 
 
 # Basic shapes collision detection functions
 spec check_collision_point_rec(point :: vector2, rec :: rectangle) :: result :: bool
+spec get_ray_collision_box(ray :: ray, box :: bounding_box) :: ray_collision :: ray_collision
 
 ############
 # TEXTURES #
