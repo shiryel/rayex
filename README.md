@@ -2,8 +2,7 @@
 
 Rayex provides Elixir NIF bindings to [Raylib](https://www.raylib.com/)
 
-> WIP: many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help \
-> NOTE: We are developing for the raylib 4.0-dev (that is why the CI is not passing right now, but you can use `make test` to test)
+> WIP: many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help
 
 ![](examples/3d_picking.gif)
 
@@ -25,7 +24,7 @@ The docs can be found at [https://hexdocs.pm/rayex](https://hexdocs.pm/rayex).
 
 You need the following deps installed on your system:
 * elixir
-* raylib (**master branch**)
+* raylib v4.0
 * pkg-config
 
 Note: If you are using Nix or NixOS you can run __nix-shell__ to get an ready to go env to work on!
@@ -38,13 +37,16 @@ iex -S mix
 
 Testing Rayex
 ```elixir
+# Import all modules
+use Rayex
+
 # open new window
-Rayex.init_window 200, 200, 'window name'
+init_window 200, 200, "window name"
 
 # draw a line
-Rayex.begin_drawing
-Rayex.draw_line 10, 10, 50, 51, %{r: 255, g: 161, b: 0, a: 255}
-Rayex.end_drawing
+begin_drawing
+draw_line 10, 10, 50, 51, %{r: 255, g: 161, b: 0, a: 255}
+end_drawing
 ```
 
 Also you can run our examples!!
