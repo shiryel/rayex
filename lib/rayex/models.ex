@@ -21,7 +21,7 @@ defmodule Rayex.Models do
   defdelegate draw_ray(ray, color), to: Raylib
 
   @doc "Draw a grid (centered at (0, 0, 0))"
-  @spec draw_grid(pos_integer(), integer()) :: :ok
+  @spec draw_grid(non_neg_integer(), float()) :: :ok
   defdelegate draw_grid(slices, spacing), to: Raylib
 
   # Model loading/unloading functions

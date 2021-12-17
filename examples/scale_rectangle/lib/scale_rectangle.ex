@@ -3,15 +3,18 @@ defmodule ScaleRectangle do
   Documentation for `ScaleRectangle`.
   """
 
+  alias Rayex.Structs, as: S
+
   require Logger
+
   use Rayex
 
   @mouse_mark_size 12.0
   @mouse_left 0
-  @color_white %{r: 245, g: 245, b: 245, a: 255}
-  @color_gray %{r: 130, g: 130, b: 130, a: 255}
-  @color_red %{r: 230, g: 41, b: 55, a: 255}
-  @color_green_a %{r: 0, g: 228, b: 48, a: 126}
+  @color_white %S.Color{r: 245, g: 245, b: 245, a: 255}
+  @color_gray %S.Color{r: 130, g: 130, b: 130, a: 255}
+  @color_red %S.Color{r: 230, g: 41, b: 55, a: 255}
+  @color_green_a %S.Color{r: 0, g: 228, b: 48, a: 126}
 
   def run do
     init_window(700, 700, "scale rectangle example")
@@ -21,11 +24,11 @@ defmodule ScaleRectangle do
   end
 
   defp game_loop(
-        %{rec: rec, should_scale?: should_scale?} = state \\ %{
-          rec: %{x: 100.0, y: 100.0, width: 200.0, height: 80.0},
-          should_scale?: false
-        }
-      ) do
+         %{rec: rec, should_scale?: should_scale?} = state \\ %{
+           rec: %S.Rectangle{x: 100.0, y: 100.0, width: 200.0, height: 80.0},
+           should_scale?: false
+         }
+       ) do
     #
     # update states
     #
@@ -62,9 +65,9 @@ defmodule ScaleRectangle do
       draw_rectangle_lines_ex(rec, 1, @color_red)
 
       draw_triangle(
-        %{x: rec.x + rec.width - @mouse_mark_size, y: rec.y + rec.height},
-        %{x: rec.x + rec.width, y: rec.y + rec.height},
-        %{x: rec.x + rec.width, y: rec.y + rec.height - @mouse_mark_size},
+        %S.Vector2{x: rec.x + rec.width - @mouse_mark_size, y: rec.y + rec.height},
+        %S.Vector2{x: rec.x + rec.width, y: rec.y + rec.height},
+        %S.Vector2{x: rec.x + rec.width, y: rec.y + rec.height - @mouse_mark_size},
         @color_red
       )
     end
@@ -78,7 +81,7 @@ defmodule ScaleRectangle do
   end
 
   defp mouse_scale_ready?(mouse, rec) do
-    border_rec = %{
+    border_rec = %S.Rectangle{
       x: rec.x + rec.width - @mouse_mark_size,
       y: rec.y + rec.height - @mouse_mark_size,
       width: @mouse_mark_size,

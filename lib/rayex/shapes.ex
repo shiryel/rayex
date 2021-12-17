@@ -39,10 +39,10 @@ defmodule Rayex.Shapes do
   # Basic shapes collision detection functions
 
   @doc "Check if point is inside rectangle"
-  @spec check_collision_point_rec(S.Vector2.t(), S.Rectangle.t()) :: :ok
+  @spec check_collision_point_rec(S.Vector2.t(), S.Rectangle.t()) :: boolean()
   defdelegate check_collision_point_rec(point, rectangle), to: Raylib
 
   @doc "Get collision info between ray and box"
-  @spec check_collision_point_rec(S.Ray.t(), S.BoundingBox.t()) :: S.RayCollision.t()
+  @spec get_ray_collision_box(S.Ray.t(), S.BoundingBox.t()) :: S.RayCollision.t()
   defdelegate get_ray_collision_box(ray, bounding_box), to: Raylib
 end
