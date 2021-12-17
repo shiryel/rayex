@@ -19,7 +19,7 @@ The package can be installed by adding `rayex` to your list of dependencies in `
 ```elixir
 def deps do
   [
-    {:rayex, "~> 0.0.1"}
+    {:rayex, "~> 0.0.2"}
   ]
 end
 ```
