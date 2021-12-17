@@ -23,13 +23,16 @@ jobs:
       with:
         path: _build/
         key: ${{runner.os}}-${{hashFiles('mix.lock')}}-build
-
-    - name: Get deps
-      if: steps.cache-deps.outputs.cache-hit != 'true'
-      run: | 
+    
+    - name: Arch install deps
+      run: |
         pacman --noconfirm -Sy elixir raylib git clang pkg-config
         mix local.rebar --force
         mix local.hex --force
+
+    - name: Get deps
+      if: steps.cache-deps.outputs.cache-hit != 'true'
+      run: |
         mix deps.get
 
     - name: Compile

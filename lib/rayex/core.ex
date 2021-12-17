@@ -13,7 +13,7 @@ defmodule Rayex.Core do
   defdelegate init_window(width, height, title), to: Raylib
 
   @doc "Check if KEY_ESCAPE pressed or Close icon pressed"
-  @spec window_should_close() :: :ok
+  @spec window_should_close() :: boolean()
   defdelegate window_should_close, to: Raylib
 
   @doc "Close window and unload OpenGL context"
@@ -49,15 +49,15 @@ defmodule Rayex.Core do
   defdelegate window_resized?, to: Raylib, as: :is_window_resized
 
   @doc "Check if one specific window flag is enabled"
-  @spec window_state?(pos_integer()) :: boolean()
+  @spec window_state?(non_neg_integer()) :: boolean()
   defdelegate window_state?(flag), to: Raylib, as: :is_window_state
 
   @doc "Set window configuration state using flags"
-  @spec set_window_state(pos_integer()) :: :ok
+  @spec set_window_state(non_neg_integer()) :: :ok
   defdelegate set_window_state(flag), to: Raylib
 
   @doc "Clear window configuration state flags"
-  @spec clear_window_state(pos_integer()) :: :ok
+  @spec clear_window_state(non_neg_integer()) :: :ok
   defdelegate clear_window_state(flag), to: Raylib
 
   @doc "Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)"
@@ -87,7 +87,7 @@ defmodule Rayex.Core do
 
   # Screen-space-related functions
   @doc "Get a ray trace from mouse position"
-  @spec get_mouse_ray(S.Vector2.t(), S.Color.t()) :: S.Ray.t()
+  @spec get_mouse_ray(S.Vector2.t(), S.Camera3D.t()) :: S.Ray.t()
   defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
   @doc "Begin 2D mode with custom camera (2D)"
@@ -109,11 +109,11 @@ defmodule Rayex.Core do
   # Timing-related functions
 
   @doc "Set target FPS (maximum)"
-  @spec set_target_fps(pos_integer()) :: :ok
+  @spec set_target_fps(non_neg_integer()) :: :ok
   defdelegate set_target_fps(fps), to: Raylib
 
   @doc "Get current FPS"
-  @spec get_fps() :: pos_integer()
+  @spec get_fps() :: non_neg_integer()
   defdelegate get_fps, to: Raylib
 
   @doc "Get time in seconds for last frame drawn (delta time)"

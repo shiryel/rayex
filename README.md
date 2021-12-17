@@ -1,5 +1,11 @@
 # Rayex
 
+[![Hex.pm](https://img.shields.io/hexpm/v/rayex.svg)](https://hex.pm/packages/rayex)
+[![API Docs](https://img.shields.io/badge/api-docs-blue.svg?style=flat)](https://hexdocs.pm/rayex/)
+[![Run Tests](https://github.com/shiryel/rayex/actions/workflows/test.yml/badge.svg)](https://github.com/shiryel/rayex/actions/workflows/test.yml)
+
+[![Twitter](https://img.shields.io/twitter/follow/shiryel_.svg?style=social)](https://twitter.com/shiryel_)
+
 Rayex provides Elixir NIF bindings to [Raylib](https://www.raylib.com/)
 
 > WIP: many of the functions on raylib are yet not implemented, check the [contributing section](#contributing) to help
@@ -13,7 +19,7 @@ The package can be installed by adding `rayex` to your list of dependencies in `
 ```elixir
 def deps do
   [
-    {:rayex, "~> 0.0.1"}
+    {:rayex, "~> 0.0.2"}
   ]
 end
 ```

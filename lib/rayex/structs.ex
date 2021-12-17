@@ -64,7 +64,12 @@ defmodule Rayex.Structs.Color do
   @enforce_keys ~w[r g b a]a
   defstruct ~w[r g b a]a
 
-  @type t :: %__MODULE__{r: pos_integer, g: pos_integer, b: pos_integer, a: pos_integer}
+  @type t :: %__MODULE__{
+          r: non_neg_integer(),
+          g: non_neg_integer(),
+          b: non_neg_integer(),
+          a: non_neg_integer()
+        }
 end
 
 defmodule Rayex.Structs.Rectangle do
@@ -97,7 +102,7 @@ defmodule Rayex.Structs.Texture2D do
   defstruct ~w[id width height mipmaps format]a
 
   @type t :: %__MODULE__{
-          id: pos_integer(),
+          id: non_neg_integer(),
           width: float(),
           height: float(),
           mipmaps: integer(),
@@ -112,7 +117,7 @@ defmodule Rayex.Structs.TextureCubemap do
   defstruct ~w[id width height mipmaps format]a
 
   @type t :: %__MODULE__{
-          id: pos_integer(),
+          id: non_neg_integer(),
           width: float(),
           height: float(),
           mipmaps: integer(),
@@ -126,7 +131,7 @@ defmodule Rayex.Structs.RenderTexture do
   defstruct ~w[id texture depth]a
 
   @type t :: %__MODULE__{
-          id: pos_integer,
+          id: non_neg_integer(),
           texture: Rayex.Structs.Texture2D.t(),
           depth: Rayex.Structs.Texture2D.t()
         }
@@ -139,7 +144,7 @@ defmodule Rayex.Structs.RenderTexture2D do
   defstruct ~w[id texture depth]a
 
   @type t :: %__MODULE__{
-          id: pos_integer(),
+          id: non_neg_integer(),
           texture: Rayex.Structs.Texture2D.t(),
           depth: Rayex.Structs.Texture2D.t()
         }
@@ -235,18 +240,18 @@ defmodule Rayex.Structs.Mesh do
           texcoords2: [float],
           normals: [float],
           tangents: [float],
-          colors: [pos_integer],
-          indices: [pos_integer],
+          colors: [non_neg_integer()],
+          indices: [non_neg_integer()],
 
           # Animation vertex data
           anim_vertices: [float],
           anim_normals: [float],
-          bone_ids: [pos_integer],
+          bone_ids: [non_neg_integer()],
           bone_weights: [float],
 
           # OpenGL identifiers
-          vao_id: [pos_integer],
-          vbo_id: [pos_integer]
+          vao_id: [non_neg_integer()],
+          vbo_id: [non_neg_integer()]
         }
 end
 
@@ -256,7 +261,7 @@ defmodule Rayex.Structs.Shader do
   defstruct ~w[id locs]a
 
   @type t :: %__MODULE__{
-          id: pos_integer(),
+          id: non_neg_integer(),
           locs: [integer()]
         }
 end
@@ -381,10 +386,10 @@ defmodule Rayex.Structs.Wave do
   defstruct ~w[frame_count sample_rate sample_size channels data]a
 
   @type t :: %__MODULE__{
-          frame_count: pos_integer(),
-          sample_rate: pos_integer(),
-          sample_size: pos_integer(),
-          channels: pos_integer(),
+          frame_count: non_neg_integer(),
+          sample_rate: non_neg_integer(),
+          sample_size: non_neg_integer(),
+          channels: non_neg_integer(),
           data: binary()
         }
 end
@@ -405,9 +410,9 @@ defmodule Rayex.Structs.AudioStream do
 
   @type t :: %__MODULE__{
           buffer: [Rayex.Structs.RAudioBuffer.t()],
-          sample_rate: pos_integer(),
-          sample_size: pos_integer(),
-          channels: pos_integer()
+          sample_rate: non_neg_integer(),
+          sample_size: non_neg_integer(),
+          channels: non_neg_integer()
         }
 end
 
@@ -418,7 +423,7 @@ defmodule Rayex.Structs.Sound do
 
   @type t :: %__MODULE__{
           stream: Rayex.Structs.AudioStream.t(),
-          frame_count: pos_integer()
+          frame_count: non_neg_integer()
         }
 end
 
@@ -429,7 +434,7 @@ defmodule Rayex.Structs.Music do
 
   @type t :: %__MODULE__{
           stream: Rayex.Structs.AudioStream.t(),
-          frame_count: pos_integer(),
+          frame_count: non_neg_integer(),
           looping: boolean(),
           ctx_type: integer(),
           ctx_data: binary()

@@ -4,7 +4,7 @@ defmodule Rayex.MixProject do
   def project do
     [
       app: :rayex,
-      version: "0.0.1",
+      version: "0.0.2",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       compilers: [:unifex, :bundlex] ++ Mix.compilers(),
@@ -38,7 +38,7 @@ defmodule Rayex.MixProject do
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       # Deps
       {:unifex, "~> 0.7.0"},
-      {:bundlex, git: "https://github.com/shiryel/bundlex", branch: "master", override: true}
+      {:bundlex, "~> 0.5.1"}
     ]
   end
 
