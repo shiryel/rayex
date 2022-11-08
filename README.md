@@ -26,14 +26,17 @@ end
 
 The docs can be found at [https://hexdocs.pm/rayex](https://hexdocs.pm/rayex).
 
-## How to run
+## Running from source
 
-You need the following deps installed on your system:
+You need the following packages installed on your system:
 * elixir
-* raylib v4.0
+* erlang (headers)
 * pkg-config
+* raylib v4.2
+* glibc
+* clang-tools (formatter)
 
-Note: If you are using Nix or NixOS you can run __nix-shell__ to get an ready to go env to work on!
+> If you are using Nix or NixOS you can run __nix develop__ to get an ready to go env to work with!
 
 Now you can run:
 ```bash
@@ -41,21 +44,30 @@ mix deps.get
 iex -S mix
 ```
 
-Testing Rayex
-```elixir
+And test with:
+```exs
 # Import all modules
-use Rayex
+iex> use Rayex
 
 # open new window
-init_window 200, 200, "window name"
+iex> init_window(200, 200, "window name")
 
 # draw a line
-begin_drawing
-draw_line 10, 10, 50, 51, %{r: 255, g: 161, b: 0, a: 255}
-end_drawing
+iex> begin_drawing()
+iex> draw_line(10, 10, 50, 51, %{r: 255, g: 161, b: 0, a: 255})
+iex> end_drawing()
 ```
 
-Also you can run our examples!!
+You can also run our examples!!
+
+```bash
+cd examples/3d_picking/
+mix deps.gen
+iex -S mix
+```
+```exs
+iex> The3dPicking.run()
+```
 
 ## Contributing
 
