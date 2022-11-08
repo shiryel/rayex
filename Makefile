@@ -22,7 +22,7 @@ pre:
 .PHONY: clean
 clean:
 	mix clean
-	rm -r priv
+	rm -r c_src/rayex/_generated
 
 .PHONY: test
 test:
