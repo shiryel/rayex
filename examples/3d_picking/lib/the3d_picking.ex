@@ -28,7 +28,7 @@ defmodule The3dPicking do
       projection: 0
     }
 
-    set_camera_mode(camera, 1)
+    update_camera(camera, 1)
 
     game_loop(%{camera: camera, hit?: false})
   end
@@ -43,7 +43,7 @@ defmodule The3dPicking do
         hit?
       end
 
-    state = %{state | hit?: hit?, camera: update_camera(camera)}
+    state = %{state | hit?: hit?, camera: update_camera(camera, 1)}
 
     #
     # draw

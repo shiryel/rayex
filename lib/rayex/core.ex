@@ -169,36 +169,11 @@ defmodule Rayex.Core do
 
   # Camera System Functions (Module: rcamera)
 
-  @doc "Set camera mode (multiple camera modes available)"
-  @spec set_camera_mode(S.Camera3D.t(), integer()) :: integer()
-  defdelegate set_camera_mode(camera_3d, mode), to: Raylib
-
   @doc "Update camera position for selected mode"
-  @spec update_camera(S.Camera3D.t()) :: S.Camera3D.t()
-  defdelegate update_camera(camera_3d), to: Raylib
+  @spec update_camera(S.Camera3D.t(), integer()) :: :ok
+  defdelegate update_camera(camera_3d, mode), to: Raylib
 
-  @doc "Set camera pan key to combine with mouse movement (free camera)"
-  @spec set_camera_pan_control(integer()) :: :ok
-  defdelegate set_camera_pan_control(key_pan), to: Raylib
-
-  @doc "Set camera alt key to combine with mouse movement (free camera)"
-  @spec set_camera_alt_control(integer()) :: :ok
-  defdelegate set_camera_alt_control(key_alt), to: Raylib
-
-  @doc "Set camera smooth zoom key to combine with mouse (free camera)"
-  @spec set_camera_smooth_zoom_control(integer()) :: :ok
-  defdelegate set_camera_smooth_zoom_control(key_smooth_zoom), to: Raylib
-
-  @doc "Set camera move controls (1st person and 3rd person cameras)"
-  @spec set_camera_move_controls(integer(), integer(), integer(), integer(), integer(), integer()) ::
-          :ok
-  defdelegate set_camera_move_controls(
-                key_front,
-                key_back,
-                key_right,
-                key_left,
-                key_up,
-                key_down
-              ),
-              to: Raylib
+  @doc "Update camera movement/rotation"
+  @spec update_camera_pro(S.Camera3D.t(), S.Vector3.t(), S.Vector3.t(), float()) :: :ok
+  defdelegate update_camera_pro(camera_3d, movement, rotation, zoom), to: Raylib
 end

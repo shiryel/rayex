@@ -79,21 +79,15 @@ spec get_mouse_position() :: xy :: vector2
 # Gestures and Touch Handling Functions (Module: rgestures)
 
 # Camera System Functions (Module: rcamera)
-spec set_camera_mode(camera :: camera_3d, mode :: int) :: camera_id :: ulong
-spec update_camera(camera :: camera_3d) :: camera :: camera_3d
+spec update_camera(camera :: camera_3d, mode :: int) :: :ok :: label
 
-spec set_camera_pan_control(key_pan :: int) :: :ok :: label
-spec set_camera_alt_control(key_alt :: int) :: :ok :: label
-spec set_camera_smooth_zoom_control(key_smooth_zoom :: int) :: :ok :: label
-
-spec set_camera_move_controls(
-       key_front :: int,
-       key_back :: int,
-       key_right :: int,
-       key_left :: int,
-       key_up :: int,
-       key_down :: int
-     ) :: :ok :: label
+spec update_camera_pro(
+       camera :: camera_3d,
+       movement :: vector3,
+       rotation :: vector3,
+       zoom :: float
+     ) ::
+       :ok :: label
 
 ##########
 # SHAPES #
