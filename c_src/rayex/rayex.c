@@ -343,40 +343,16 @@ UNIFEX_TERM get_mouse_position(UnifexEnv *env) {
 // Gestures and Touch Handling Functions (Module: rgestures)
 
 // Camera System Functions (Module: rcamera)
-UNIFEX_TERM set_camera_mode(UnifexEnv *env, camera_3d c, int mode) {
-  SetCameraMode(CAMERA3D(c), mode);
-  uintptr_t res = (uintptr_t)&c;
-  return set_camera_mode_result(env, res);
-}
-
-UNIFEX_TERM update_camera(UnifexEnv *env, camera_3d c) {
+UNIFEX_TERM update_camera(UnifexEnv *env, camera_3d c, int mode) {
   Camera3D camera = CAMERA3D(c);
-  UpdateCamera(&camera);
-  return update_camera_result(env, E_CAMERA3D(camera));
+  UpdateCamera(&camera, mode);
+  return update_camera_result_ok(env);
 }
 
-UNIFEX_TERM set_camera_pan_control(UnifexEnv *env, int key_pan) {
-  SetCameraPanControl(key_pan);
-  return set_camera_pan_control_result_ok(env);
-}
-
-UNIFEX_TERM set_camera_alt_control(UnifexEnv *env, int key_alt) {
-  SetCameraAltControl(key_alt);
-  return set_camera_alt_control_result_ok(env);
-}
-
-UNIFEX_TERM set_camera_smooth_zoom_control(UnifexEnv *env,
-                                           int key_smooth_zoom) {
-  SetCameraSmoothZoomControl(key_smooth_zoom);
-  return set_camera_smooth_zoom_control_result_ok(env);
-}
-
-UNIFEX_TERM set_camera_move_controls(UnifexEnv *env, int key_front,
-                                     int key_back, int key_right, int key_left,
-                                     int key_up, int key_down) {
-  SetCameraMoveControls(key_front, key_back, key_right, key_left, key_up,
-                        key_down);
-  return set_camera_move_controls_result_ok(env);
+UNIFEX_TERM update_camera_pro(UnifexEnv *env, camera_3d c, vector3 movement, vector3 rotation, double zoom) {
+  Camera3D camera = CAMERA3D(c);
+  UpdateCameraPro(&camera, VECTOR3(movement), VECTOR3(rotation), zoom);
+  return update_camera_pro_result_ok(env);
 }
 
 /**********
