@@ -9,6 +9,8 @@ defmodule The3dPicking do
 
   @cube_position %S.Vector3{x: 0.0, y: 1.0, z: 0.0}
   @mouse_left 0
+  @mouse_right 1
+  @camera_first_person 4
   @color_white %S.Color{r: 245, g: 245, b: 245, a: 255}
   @color_darkgray %S.Color{r: 80, g: 80, b: 80, a: 255}
   @color_gray %S.Color{r: 130, g: 130, b: 130, a: 255}
@@ -25,15 +27,18 @@ defmodule The3dPicking do
       target: %S.Vector3{x: 0.0, y: 0.0, z: 0.0},
       up: %S.Vector3{x: 0.0, y: 1.0, z: 0.0},
       fovy: 45.0,
+      # perspective projection
       projection: 0
     }
 
-    update_camera(camera, 1)
+    camera = update_camera(camera, @camera_first_person)
 
     game_loop(%{camera: camera, hit?: false})
   end
 
   defp game_loop(%{camera: camera, hit?: hit?} = state) do
+    camera = (is_cursor_hidden?() && update_camera(camera, @camera_first_person)) || camera
+
     ray = get_mouse_position() |> get_mouse_ray(camera)
 
     hit? =
@@ -43,7 +48,12 @@ defmodule The3dPicking do
         hit?
       end
 
-    state = %{state | hit?: hit?, camera: update_camera(camera, 1)}
+    if mouse_button_pressed?(@mouse_right) do
+      (is_cursor_hidden?() && enable_cursor()) ||
+        disable_cursor()
+    end
+
+    state = %{state | hit?: hit?, camera: camera}
 
     #
     # draw
@@ -70,6 +80,8 @@ defmodule The3dPicking do
     # --- 3D ---
 
     draw_text("Try selecting the box with mouse!", 240, 10, 20, @color_darkgray)
+    draw_text("Right click mouse to toggle camera controls", 10, 430, 10, @color_gray)
+
     draw_fps(10, 10)
 
     end_drawing()

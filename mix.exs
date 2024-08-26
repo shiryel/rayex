@@ -4,7 +4,7 @@ defmodule Rayex.MixProject do
   def project do
     [
       app: :rayex,
-      version: "0.0.2",
+      version: "0.0.3",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       compilers: [:unifex, :bundlex] ++ Mix.compilers(),
@@ -37,8 +37,8 @@ defmodule Rayex.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       # Deps
-      {:unifex, "~> 1.0.0"},
-      {:bundlex, "~> 1.0.0"}
+      {:unifex, "~> 1.2.0"},
+      {:bundlex, "~> 1.5"}
     ]
   end
 

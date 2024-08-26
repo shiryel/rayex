@@ -17,7 +17,7 @@ defmodule ScaleRectangle do
   @color_green_a %S.Color{r: 0, g: 228, b: 48, a: 126}
 
   def run do
-    init_window(700, 700, "scale rectangle example")
+    init_window(800, 450, "scale rectangle example")
     set_target_fps(60)
 
     game_loop()
@@ -48,9 +48,6 @@ defmodule ScaleRectangle do
       | rec: rec,
         should_scale?: should_scale?
     }
-
-    Logger.debug("state: #{inspect(state, pretty: true)}")
-    Logger.debug("mouse: #{inspect(mouse, pretty: true)}")
 
     #
     # draw

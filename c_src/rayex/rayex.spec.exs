@@ -27,6 +27,13 @@ spec toggle_fullscreen() :: :ok :: label
 
 # Cursor-related functions
 
+spec show_cursor() :: :ok :: label
+spec hide_cursor() :: :ok :: label
+spec is_cursor_hidden() :: result :: bool
+spec enable_cursor() :: :ok :: label
+spec disable_cursor() :: :ok :: label
+spec is_cursor_on_screen() :: result :: bool
+
 # Drawing-related functions
 spec clear_background(color :: color) :: :ok :: label
 spec begin_drawing() :: :ok :: label
@@ -79,15 +86,14 @@ spec get_mouse_position() :: xy :: vector2
 # Gestures and Touch Handling Functions (Module: rgestures)
 
 # Camera System Functions (Module: rcamera)
-spec update_camera(camera :: camera_3d, mode :: int) :: :ok :: label
+spec update_camera(camera :: camera_3d, mode :: int) :: camera :: camera_3d
 
 spec update_camera_pro(
        camera :: camera_3d,
        movement :: vector3,
        rotation :: vector3,
        zoom :: float
-     ) ::
-       :ok :: label
+     ) :: camera :: camera_3d
 
 ##########
 # SHAPES #

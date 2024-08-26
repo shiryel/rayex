@@ -66,6 +66,30 @@ defmodule Rayex.Core do
 
   # Cursor-related functions
 
+  @doc "Shows cursor"
+  @spec show_cursor() :: :ok
+  defdelegate show_cursor, to: Raylib
+
+  @doc "Hides cursor"
+  @spec hide_cursor() :: :ok
+  defdelegate hide_cursor, to: Raylib
+
+  @doc "Check if cursor is not visible"
+  @spec is_cursor_hidden?() :: boolean()
+  defdelegate is_cursor_hidden?, to: Raylib, as: :is_cursor_hidden
+
+  @doc "Enables cursor (unlock cursor)"
+  @spec enable_cursor() :: :ok
+  defdelegate enable_cursor, to: Raylib
+
+  @doc "Disables cursor (lock cursor)"
+  @spec disable_cursor() :: :ok
+  defdelegate disable_cursor, to: Raylib
+
+  @doc "Check if cursor is on the screen"
+  @spec is_cursor_on_screen?() :: boolean()
+  defdelegate is_cursor_on_screen?, to: Raylib, as: :is_cursor_on_screen
+
   # Drawing-related functions
 
   @doc "Set background color (framebuffer clear color)"
@@ -79,16 +103,6 @@ defmodule Rayex.Core do
   @doc "End canvas drawing and swap buffers (double buffering)"
   @spec end_drawing() :: :ok
   defdelegate end_drawing, to: Raylib
-
-  # VR stereo config functions for VR simulator
-
-  # Shader management functions
-  # NOTE: Shader functionality is not available on OpenGL 1.1
-
-  # Screen-space-related functions
-  @doc "Get a ray trace from mouse position"
-  @spec get_mouse_ray(S.Vector2.t(), S.Camera3D.t()) :: S.Ray.t()
-  defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
   @doc "Begin 2D mode with custom camera (2D)"
   @spec begin_mode_2d(S.Camera2D.t()) :: :ok
@@ -105,6 +119,16 @@ defmodule Rayex.Core do
   @doc "Ends 3D mode and returns to default 2D orthographic mode"
   @spec end_mode_3d() :: :ok
   defdelegate end_mode_3d, to: Raylib
+
+  # VR stereo config functions for VR simulator
+
+  # Shader management functions
+  # NOTE: Shader functionality is not available on OpenGL 1.1
+
+  # Screen-space-related functions
+  @doc "Get a ray trace from mouse position"
+  @spec get_mouse_ray(S.Vector2.t(), S.Camera3D.t()) :: S.Ray.t()
+  defdelegate get_mouse_ray(mouse_position, camera), to: Raylib
 
   # Timing-related functions
 
@@ -170,10 +194,10 @@ defmodule Rayex.Core do
   # Camera System Functions (Module: rcamera)
 
   @doc "Update camera position for selected mode"
-  @spec update_camera(S.Camera3D.t(), integer()) :: :ok
+  @spec update_camera(S.Camera3D.t(), pos_integer()) :: S.Camera3D.t()
   defdelegate update_camera(camera_3d, mode), to: Raylib
 
   @doc "Update camera movement/rotation"
-  @spec update_camera_pro(S.Camera3D.t(), S.Vector3.t(), S.Vector3.t(), float()) :: :ok
+  @spec update_camera_pro(S.Camera3D.t(), S.Vector3.t(), S.Vector3.t(), float()) :: S.Camera3D.t()
   defdelegate update_camera_pro(camera_3d, movement, rotation, zoom), to: Raylib
 end

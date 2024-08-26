@@ -223,6 +223,36 @@ UNIFEX_TERM toggle_fullscreen(UnifexEnv *env) {
 
 // Cursor-related functions
 
+UNIFEX_TERM show_cursor(UnifexEnv *env) {
+  ShowCursor();
+  return show_cursor_result_ok(env);
+}
+
+UNIFEX_TERM hide_cursor(UnifexEnv *env) {
+  HideCursor();
+  return hide_cursor_result_ok(env);
+}
+
+UNIFEX_TERM is_cursor_hidden(UnifexEnv *env) {
+  bool res = IsCursorHidden();
+  return is_cursor_hidden_result(env, res);
+}
+
+UNIFEX_TERM enable_cursor(UnifexEnv *env) {
+  EnableCursor();
+  return enable_cursor_result_ok(env);
+}
+
+UNIFEX_TERM disable_cursor(UnifexEnv *env) {
+  DisableCursor();
+  return disable_cursor_result_ok(env);
+}
+
+UNIFEX_TERM is_cursor_on_screen(UnifexEnv *env) {
+  bool res = IsCursorOnScreen();
+  return is_cursor_on_screen_result(env, res);
+}
+
 // Drawing-related functions
 
 UNIFEX_TERM clear_background(UnifexEnv *env, color c) {
@@ -346,13 +376,14 @@ UNIFEX_TERM get_mouse_position(UnifexEnv *env) {
 UNIFEX_TERM update_camera(UnifexEnv *env, camera_3d c, int mode) {
   Camera3D camera = CAMERA3D(c);
   UpdateCamera(&camera, mode);
-  return update_camera_result_ok(env);
+  return update_camera_result(env, E_CAMERA3D(camera));
 }
 
-UNIFEX_TERM update_camera_pro(UnifexEnv *env, camera_3d c, vector3 movement, vector3 rotation, double zoom) {
+UNIFEX_TERM update_camera_pro(UnifexEnv *env, camera_3d c, vector3 movement,
+                              vector3 rotation, double zoom) {
   Camera3D camera = CAMERA3D(c);
   UpdateCameraPro(&camera, VECTOR3(movement), VECTOR3(rotation), zoom);
-  return update_camera_pro_result_ok(env);
+  return update_camera_pro_result(env, E_CAMERA3D(camera));
 }
 
 /**********

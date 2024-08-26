@@ -3,7 +3,7 @@
 
    def project() do
      [
-       natives: natives(Bundlex.platform())
+       natives: natives(Bundlex.get_target())
      ]
    end
 
@@ -12,7 +12,9 @@
        rayex: [
          sources: ["rayex.c"],
          interface: [:nif, :cnode],
-         pkg_configs: ["raylib"],
+         os_deps: [
+           raylib: {:pkg_config, "raylib"}
+         ],
          preprocessor: Unifex
        ]
      ]

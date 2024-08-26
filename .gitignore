@@ -30,3 +30,4 @@ rayex-*.tar
 
 /c_src/rayex/_generated/
 .ccls-cache/
+/.direnv
