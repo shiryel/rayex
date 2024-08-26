@@ -1,6 +1,8 @@
 name: Run Tests
 
-on: [push, pull_request]
+on: 
+  - push
+  - pull_request
 
 jobs:
   tests:
@@ -9,17 +11,17 @@ jobs:
 
     steps:
     - name: Checkout 
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Get Deps Cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       id: cache-deps
       with:
         path: deps/
         key: ${{hashFiles('mix.lock')}}-deps
 
     - name: Get Build Cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: _build/
         key: ${{runner.os}}-${{hashFiles('mix.lock')}}-build
@@ -49,3 +51,23 @@ jobs:
 
     - name: Check Dialyzer
       run: mix dialyzer
+
+    - name: Check 3D Picking example
+      run: |
+        cd examples/3d_picking
+        mix deps.get
+        mix compile --warnings-as-errors
+        mix credo --strict
+        mix format --check-formatted
+        mix dialyzer --force-check
+        cd ../..
+
+    - name: Check Scale Rectangle example
+      run: |
+        cd examples/scale_rectangle
+        mix deps.get
+        mix compile --warnings-as-errors
+        mix credo --strict
+        mix format --check-formatted
+        mix dialyzer --force-check
+        cd ../..

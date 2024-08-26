@@ -37,7 +37,17 @@ defmodule The3dPicking do
   end
 
   defp game_loop(%{camera: camera, hit?: hit?} = state) do
-    camera = (is_cursor_hidden?() && update_camera(camera, @camera_first_person)) || camera
+    camera =
+      if is_cursor_hidden?() do
+        update_camera(camera, @camera_first_person)
+      else
+        camera
+      end
+
+    if mouse_button_pressed?(@mouse_right) do
+      (is_cursor_hidden?() && enable_cursor()) ||
+        disable_cursor()
+    end
 
     ray = get_mouse_position() |> get_mouse_ray(camera)
 
@@ -48,16 +58,12 @@ defmodule The3dPicking do
         hit?
       end
 
-    if mouse_button_pressed?(@mouse_right) do
-      (is_cursor_hidden?() && enable_cursor()) ||
-        disable_cursor()
-    end
+    state = draw(ray, %{state | hit?: hit?, camera: camera})
 
-    state = %{state | hit?: hit?, camera: camera}
+    (window_should_close() && close_window()) || game_loop(state)
+  end
 
-    #
-    # draw
-    #
+  defp draw(ray, %{camera: camera, hit?: hit?} = state) do
     begin_drawing()
     clear_background(@color_white)
 
@@ -85,11 +91,8 @@ defmodule The3dPicking do
     draw_fps(10, 10)
 
     end_drawing()
-    #
-    # end draw
-    #
 
-    (window_should_close() && close_window()) || game_loop(state)
+    state
   end
 
   defp check_hit(ray) do
