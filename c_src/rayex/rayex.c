@@ -339,6 +339,46 @@ UNIFEX_TERM get_time(UnifexEnv *env) {
 
 // Input-related functions: keyboard
 
+UNIFEX_TERM is_key_pressed(UnifexEnv *env, int key) {
+  bool res = IsKeyPressed(key);
+  return is_key_pressed_result(env, res);
+}
+
+UNIFEX_TERM is_key_pressed_repeat(UnifexEnv *env, int key) {
+  bool res = IsKeyPressedRepeat(key);
+  return is_key_pressed_repeat_result(env, res);
+}
+
+UNIFEX_TERM is_key_down(UnifexEnv *env, int key) {
+  bool res = IsKeyDown(key);
+  return is_key_down_result(env, res);
+}
+
+UNIFEX_TERM is_key_released(UnifexEnv *env, int key) {
+  bool res = IsKeyReleased(key);
+  return is_key_released_result(env, res);
+}
+
+UNIFEX_TERM is_key_up(UnifexEnv *env, int key) {
+  bool res = IsKeyUp(key);
+  return is_key_up_result(env, res);
+}
+
+UNIFEX_TERM get_key_pressed(UnifexEnv *env) {
+  int res = GetKeyPressed();
+  return get_key_pressed_result(env, res);
+}
+
+UNIFEX_TERM get_char_pressed(UnifexEnv *env) {
+  int res = GetCharPressed();
+  return get_char_pressed_result(env, res);
+}
+
+UNIFEX_TERM set_exit_key(UnifexEnv *env, int key) {
+  SetExitKey(key);
+  return set_exit_key_result_ok(env);
+}
+
 // Input-related functions: gamepads
 
 // Input-related functions: mouse

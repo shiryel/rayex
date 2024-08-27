@@ -163,6 +163,36 @@ defmodule Rayex.Core do
 
   # Input-related functions: keyboard
 
+  @doc "Check if a key has been pressed once"
+  @spec is_key_pressed?(integer()) :: boolean()
+  defdelegate is_key_pressed?(key), to: Raylib, as: :is_key_pressed
+
+  @doc "Check if a key is being pressed"
+  @spec is_key_pressed_repeat?(integer()) :: boolean()
+  defdelegate is_key_pressed_repeat?(key), to: Raylib, as: :is_key_pressed_repeat
+
+  @doc "Check if a key is being pressed"
+  @spec is_key_down?(integer()) :: boolean()
+  defdelegate is_key_down?(key), to: Raylib, as: :is_key_down
+
+  @doc "Check if a key has been released"
+  @spec is_key_released?(integer()) :: boolean()
+  defdelegate is_key_released?(key), to: Raylib, as: :is_key_released
+
+  @doc "Check is a key is not being pressed"
+  @spec is_key_up?(integer()) :: boolean()
+  defdelegate is_key_up?(key), to: Raylib, as: :is_key_up
+
+  @spec get_key_pressed() :: integer()
+  defdelegate get_key_pressed, to: Raylib
+
+  @spec get_char_pressed() :: integer()
+  defdelegate get_char_pressed, to: Raylib
+
+  @doc "Set the key that will close the program"
+  @spec set_exit_key(integer()) :: :ok
+  defdelegate set_exit_key(key), to: Raylib
+
   # Input-related functions: gamepads
 
   # Input-related functions: mouse

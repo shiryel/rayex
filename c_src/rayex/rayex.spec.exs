@@ -72,6 +72,30 @@ spec get_time() :: time_from_start :: float
 
 # Input-related functions: keyboard
 
+spec is_key_pressed(key :: int) :: result :: bool
+dirty(:cpu, is_key_pressed: 1)
+
+spec is_key_pressed_repeat(key :: int) :: result :: bool
+dirty(:cpu, is_key_pressed_repeat: 1)
+
+spec is_key_down(key :: int) :: result :: bool
+dirty(:cpu, is_key_down: 1)
+
+spec is_key_released(key :: int) :: result :: bool
+dirty(:cpu, is_key_released: 1)
+
+spec is_key_up(key :: int) :: result :: bool
+dirty(:cpu, is_key_up: 1)
+
+spec get_key_pressed() :: key :: int
+dirty(:cpu, get_key_pressed: 0)
+
+spec get_char_pressed() :: character :: int
+dirty(:cpu, get_char_pressed: 0)
+
+spec set_exit_key(key :: int) :: :ok :: label
+dirty(:cpu, set_exit_key: 1)
+
 # Input-related functions: gamepads
 
 # Input-related functions: mouse
