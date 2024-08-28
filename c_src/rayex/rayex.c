@@ -1,6 +1,28 @@
 #include "rayex.h"
 #include <raylib.h>
 
+/*
+ * Payloads let us ignore some structs when binding data from Elixir <-> C
+ * But will make the data unavailable on the elixir side!
+ */
+#define CREATE_UNIFEX_PAYLOAD_FOR(T, name)                                     \
+  UnifexPayload create_##name##_unifex_payload(UnifexEnv *env, T value) {      \
+    UnifexPayload payload;                                                     \
+    unifex_payload_alloc(env, UNIFEX_PAYLOAD_BINARY, sizeof(value), &payload); \
+    memcpy(payload.data, &value, payload.size);                                \
+    return payload;                                                            \
+  }                                                                            \
+                                                                               \
+  T get_##name##_unifex_payload(UnifexEnv *env, UnifexPayload *in_payload) {   \
+    UnifexPayload out_payload;                                                 \
+    unifex_payload_alloc(env, UNIFEX_PAYLOAD_BINARY, in_payload->size,         \
+                         &out_payload);                                        \
+    memcpy(out_payload.data, in_payload->data, out_payload.size);              \
+    T result;                                                                  \
+    memcpy(&result, out_payload.data, out_payload.size);                       \
+    return result;                                                             \
+  }
+
 // NOTE: "E_" when converting back to NIF struct
 
 #define VECTOR2(v) ((Vector2){.x = v.x, .y = v.y})
@@ -581,11 +603,65 @@ UNIFEX_TERM draw_grid(UnifexEnv *env, int slices, double spacing) {
 
 // Audio device management functions
 
+UNIFEX_TERM init_audio_device(UnifexEnv *env) {
+  InitAudioDevice();
+  return init_audio_device_result_ok(env);
+}
+
+UNIFEX_TERM close_audio_device(UnifexEnv *env) {
+  CloseAudioDevice();
+  return close_audio_device_result_ok(env);
+}
+
+UNIFEX_TERM is_audio_device_ready(UnifexEnv *env) {
+  bool res = IsAudioDeviceReady();
+  return is_audio_device_ready_result(env, res);
+}
+
+UNIFEX_TERM set_master_volume(UnifexEnv *env, double volume) {
+  SetMasterVolume((float)volume);
+  return set_master_volume_result_ok(env);
+}
+
+UNIFEX_TERM get_master_volume(UnifexEnv *env) {
+  float res = GetMasterVolume();
+  return get_master_volume_result(env, res);
+}
+
 // Wave/Sound loading/unloading functions
+
+CREATE_UNIFEX_PAYLOAD_FOR(Sound, sound)
+
+UNIFEX_TERM load_sound(UnifexEnv *env, char *fileName) {
+  Sound sound = LoadSound(fileName);
+  UnifexPayload payload = create_sound_unifex_payload(env, sound);
+  UNIFEX_TERM result = load_sound_result(env, &payload);
+  unifex_payload_release(&payload);
+
+  return result;
+}
 
 // Wave/Sound management functions
 
 // Music management functions
+
+UNIFEX_TERM play_sound(UnifexEnv *env, UnifexPayload *payload) {
+  Sound sound = get_sound_unifex_payload(env, payload);
+  PlaySound(sound);
+  return play_sound_result_ok(env);
+}
+
+UNIFEX_TERM stop_sound(UnifexEnv *env, UnifexPayload *payload) {
+  Sound sound = get_sound_unifex_payload(env, payload);
+  StopSound(sound);
+  return stop_sound_result_ok(env);
+}
+
+UNIFEX_TERM is_sound_ready(UnifexEnv *env, UnifexPayload *payload) {
+  Sound sound = get_sound_unifex_payload(env, payload);
+  bool res = IsSoundReady(sound);
+  return is_sound_ready_result(env, res);
+}
 
 // AudioStream management functions
 

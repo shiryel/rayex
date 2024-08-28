@@ -227,10 +227,23 @@ spec draw_grid(slices :: int, spacing :: float) :: :ok :: label
 #########
 
 # Audio device management functions
+spec init_audio_device() :: :ok :: label
+spec close_audio_device() :: :ok :: label
+spec is_audio_device_ready() :: result :: bool
+spec set_master_volume(volume :: float) :: :ok :: label
+spec get_master_volume() :: volume :: float
 
 # Wave/Sound loading/unloading functions
 
+spec load_sound(file_name :: string) :: sound :: payload
+dirty(:io, load_sound: 1)
+
+spec is_sound_ready(sound :: payload) :: result :: bool
+
 # Wave/Sound management functions
+
+spec play_sound(sound :: payload) :: :ok :: label
+spec stop_sound(sound :: payload) :: :ok :: label
 
 # Music management functions
 
@@ -490,23 +503,21 @@ type wave :: %Rayex.Structs.Wave{
        data: payload
      }
 
-# FIXME: ? https://github.com/raysan5/raylib/blob/master/src/raylib.h#L428
-type r_audio_buffer :: %Rayex.Structs.RAudioBuffer{}
-
-type audio_stream :: %Rayex.Structs.AudioStream{
-       buffer: [r_audio_buffer],
-       sample_rate: unsigned,
-       sample_size: unsigned,
-       channels: unsigned
-     }
-
-type sound :: %Rayex.Structs.Sound{
-       stream: audio_stream,
-       frame_count: unsigned
-     }
+# type audio_stream :: %Rayex.Structs.AudioStream{
+#       buffer: [r_audio_buffer],
+#       processor: [r_audio_processor],
+#       sample_rate: unsigned,
+#       sample_size: unsigned,
+#       channels: unsigned
+#     }
+#
+# type sound :: %Rayex.Structs.Sound{
+#       stream: audio_stream,
+#       frame_count: unsigned
+#     }
 
 type music :: %Rayex.Structs.Music{
-       stream: audio_stream,
+       stream: payload,
        frame_count: unsigned,
        looping: bool,
        ctx_type: int,

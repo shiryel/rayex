@@ -315,14 +315,14 @@ end
 
 defmodule Rayex.Structs.Model do
   @moduledoc "Model"
-  @enforce_keys ~w[transform mesh_count material_count mashes materials mesh_material bone_count bones bind_pose]a
-  defstruct ~w[transform mesh_count material_count mashes materials mesh_material bone_count bones bind_pose]a
+  @enforce_keys ~w[transform mesh_count material_count meshes materials mesh_material bone_count bones bind_pose]a
+  defstruct ~w[transform mesh_count material_count meshes materials mesh_material bone_count bones bind_pose]a
 
   @type t :: %__MODULE__{
           transform: Rayex.Structs.Matrix.t(),
           mesh_count: integer(),
           material_count: integer(),
-          mashes: [Rayex.Structs.Mesh.t()],
+          meshes: [Rayex.Structs.Mesh.t()],
           materials: [Rayex.Structs.Material.t()],
           mesh_material: [integer()],
           bone_count: integer(),
@@ -394,37 +394,35 @@ defmodule Rayex.Structs.Wave do
         }
 end
 
-# XXX: ? https://github.com/raysan5/raylib/blob/master/src/raylib.h#L428
-defmodule Rayex.Structs.RAudioBuffer do
-  @moduledoc "RAudioBuffer"
-  @enforce_keys ~w[]a
-  defstruct ~w[]a
-
-  @type t :: %__MODULE__{}
-end
-
-defmodule Rayex.Structs.AudioStream do
-  @moduledoc "AudioStream"
-  @enforce_keys ~w[buffer sample_rate sample_size channels]a
-  defstruct ~w[buffer sample_rate sample_size channels]a
-
-  @type t :: %__MODULE__{
-          buffer: [Rayex.Structs.RAudioBuffer.t()],
-          sample_rate: non_neg_integer(),
-          sample_size: non_neg_integer(),
-          channels: non_neg_integer()
-        }
-end
+# defmodule Rayex.Structs.AudioStream do
+#  @moduledoc "AudioStream"
+#  @enforce_keys ~w[buffer processor sample_rate sample_size channels]a
+#  defstruct ~w[buffer processor sample_rate sample_size channels]a
+#
+#  @type t :: %__MODULE__{
+#          buffer: unifex_payload :: binary(),
+#          processor: unifex_payload :: binary(),
+#          sample_rate: non_neg_integer(),
+#          sample_size: non_neg_integer(),
+#          channels: non_neg_integer()
+#        }
+# end
+#
+# defmodule Rayex.Structs.Sound do
+#  @moduledoc "Sound"
+#  @enforce_keys ~w[stream frame_count]a
+#  defstruct ~w[stream frame_count]a
+#
+#  @type t :: %__MODULE__{
+#          stream: Rayex.Structs.AudioStream.t(),
+#          frame_count: non_neg_integer()
+#        }
+# end
 
 defmodule Rayex.Structs.Sound do
   @moduledoc "Sound"
-  @enforce_keys ~w[stream frame_count]a
-  defstruct ~w[stream frame_count]a
 
-  @type t :: %__MODULE__{
-          stream: Rayex.Structs.AudioStream.t(),
-          frame_count: non_neg_integer()
-        }
+  @type t :: binary()
 end
 
 defmodule Rayex.Structs.Music do
@@ -433,7 +431,7 @@ defmodule Rayex.Structs.Music do
   defstruct ~w[stream frame_count looping ctx_type ctx_data]a
 
   @type t :: %__MODULE__{
-          stream: Rayex.Structs.AudioStream.t(),
+          stream: binary(),
           frame_count: non_neg_integer(),
           looping: boolean(),
           ctx_type: integer(),

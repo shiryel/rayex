@@ -20,7 +20,6 @@
         ];
         buildInputs = with pkgs; [
           raylib
-          glibc
         ];
         shellHook = ''
           export CPATH="$(erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version), "/include"])])' -s init stop -noshell):`pwd`/deps/unifex/c_src/unifex/nif"
