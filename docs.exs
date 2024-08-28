@@ -1,4 +1,4 @@
-alias Rayex.{Audio, Core, Models, Shapes, Structs, Text, Textures}
+alias Rayex.{Audio, Core, Models, Shapes, Structs, Text, Textures, Keys}
 
 [
   main: "readme",
@@ -18,7 +18,8 @@ alias Rayex.{Audio, Core, Models, Shapes, Structs, Text, Textures}
       Textures,
       Text,
       Models,
-      Audio
+      Audio,
+      Keys
     ],
     Structs: [
       Structs.AudioStream,

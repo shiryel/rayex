@@ -1,5 +1,7 @@
 defmodule Rayex.Keys do
-  @moduledoc false
+  @moduledoc """
+    Keys helper functions
+  """
 
   defmacro __using__(_) do
     quote do
