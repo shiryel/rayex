@@ -64,6 +64,14 @@ defmodule Rayex.Core do
   @spec toggle_fullscreen() :: :ok
   defdelegate toggle_fullscreen, to: Raylib
 
+  @doc "Get current screen width"
+  @spec get_screen_width() :: integer()
+  defdelegate get_screen_width, to: Raylib
+
+  @doc "Get current screen height"
+  @spec get_screen_height() :: integer()
+  defdelegate get_screen_height, to: Raylib
+
   # Cursor-related functions
 
   @doc "Shows cursor"

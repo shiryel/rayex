@@ -24,6 +24,8 @@ spec is_window_state(flag :: int) :: result :: bool
 spec set_window_state(flag :: int) :: :ok :: label
 spec clear_window_state(flag :: int) :: :ok :: label
 spec toggle_fullscreen() :: :ok :: label
+spec get_screen_width() :: result :: int
+spec get_screen_height() :: result :: int
 
 # Cursor-related functions
 

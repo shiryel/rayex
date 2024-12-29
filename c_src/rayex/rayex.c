@@ -243,6 +243,16 @@ UNIFEX_TERM toggle_fullscreen(UnifexEnv *env) {
   return toggle_fullscreen_result_ok(env);
 }
 
+UNIFEX_TERM get_screen_width(UnifexEnv *env) {
+  int res = GetScreenWidth();
+  return get_screen_width_result(env, res);
+}
+
+UNIFEX_TERM get_screen_height(UnifexEnv *env) {
+  int res = GetScreenHeight();
+  return get_screen_height_result(env, res);
+}
+
 // Cursor-related functions
 
 UNIFEX_TERM show_cursor(UnifexEnv *env) {
