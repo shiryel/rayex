@@ -356,6 +356,13 @@ UNIFEX_TERM get_time(UnifexEnv *env) {
   return get_time_result(env, res);
 }
 
+// Random values generation functions
+
+UNIFEX_TERM get_random_value(UnifexEnv *env, int min, int max) {
+  int res = GetRandomValue(min, max);
+  return get_random_value_result(env, res);
+}
+
 // Misc. functions
 
 // Set custom callbacks

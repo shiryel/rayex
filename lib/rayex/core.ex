@@ -156,6 +156,12 @@ defmodule Rayex.Core do
   @spec get_time() :: float()
   defdelegate get_time, to: Raylib
 
+  # Random values generation functions
+
+  @doc "Get a random value between min and max (both included)"
+  @spec get_random_value(integer(), integer()) :: integer()
+  defdelegate get_random_value(min, max), to: Raylib
+
   # Misc. functions
 
   # Set custom callbacks

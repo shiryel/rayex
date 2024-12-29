@@ -59,6 +59,9 @@ spec get_fps() :: fps :: int
 spec get_frame_time() :: delta :: float
 spec get_time() :: time_from_start :: float
 
+# Random values generation functions
+spec get_random_value(min :: int, max :: int) :: result :: int
+
 # Misc. functions
 
 # Set custom callbacks
