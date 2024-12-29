@@ -24,6 +24,14 @@ defmodule Rayex.Shapes do
   @spec draw_line(integer(), integer(), integer(), integer(), S.Color.t()) :: :ok
   defdelegate draw_line(start_x, start_y, end_x, end_y, color), to: Raylib
 
+  @doc "Draw a color-filled circle"
+  @spec draw_circle(integer(), integer(), float(), S.Color.t()) :: :ok
+  defdelegate draw_circle(center_x, center_y, radius, color), to: Raylib
+
+  @doc "Draw a color-filled circle (Vector version)"
+  @spec draw_circle_v(S.Vector2.t(), float(), S.Color.t()) :: :ok
+  defdelegate draw_circle_v(center, radius, color), to: Raylib
+
   @doc "Draw a color-filled rectangle"
   @spec draw_rectangle_rec(S.Rectangle.t(), S.Color.t()) :: :ok
   defdelegate draw_rectangle_rec(rectangle, color), to: Raylib
