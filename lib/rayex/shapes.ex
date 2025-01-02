@@ -36,6 +36,10 @@ defmodule Rayex.Shapes do
   @spec draw_rectangle_rec(S.Rectangle.t(), S.Color.t()) :: :ok
   defdelegate draw_rectangle_rec(rectangle, color), to: Raylib
 
+  @doc "Draw a color-filled rectangle with pro parameters"
+  @spec draw_rectangle_pro(S.Rectangle.t(), S.Vector2.t(), float(), S.Color.t()) :: :ok
+  defdelegate draw_rectangle_pro(rectangle, origin, rotation, color), to: Raylib
+
   @doc "Draw rectangle outline with extended parameters"
   @spec draw_rectangle_lines_ex(S.Rectangle.t(), integer(), S.Color.t()) :: :ok
   defdelegate draw_rectangle_lines_ex(rectangle, line_thick, color), to: Raylib

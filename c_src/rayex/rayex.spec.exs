@@ -142,6 +142,7 @@ spec draw_line(start_x :: int, start_y :: int, end_x :: int, end_y :: int, color
 spec draw_circle(center_x :: int, center_y :: int, radius :: float, color :: color) :: :ok :: label
 spec draw_circle_v(center :: vector2, radius :: float, color :: color) :: :ok :: label
 spec draw_rectangle_rec(rec :: rectangle, color :: color) :: :ok :: label
+spec draw_rectangle_pro(rec :: rectangle, origin :: vector2, rotation :: float, color :: color) :: :ok :: label
 spec draw_rectangle_lines_ex(rec :: rectangle, line_thick :: int, color :: color) :: :ok :: label
 spec draw_triangle(v1 :: vector2, v2 :: vector2, v3 :: vector2, color :: color) :: :ok :: label
 

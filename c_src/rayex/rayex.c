@@ -507,6 +507,11 @@ UNIFEX_TERM draw_rectangle_rec(UnifexEnv *env, rectangle r, color c) {
   return draw_rectangle_rec_result_ok(env);
 }
 
+UNIFEX_TERM draw_rectangle_pro(UnifexEnv *env, rectangle r, vector2 origin, double rotation, color c) {
+  DrawRectanglePro(RECTANGLE(r), VECTOR2(origin), rotation, COLOR(c));
+  return draw_rectangle_pro_result_ok(env);
+}
+
 UNIFEX_TERM draw_rectangle_lines_ex(UnifexEnv *env, rectangle r, int line_thick,
                                     color c) {
   DrawRectangleLinesEx(RECTANGLE(r), line_thick, COLOR(c));
