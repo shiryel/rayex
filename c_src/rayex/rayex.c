@@ -524,6 +524,11 @@ UNIFEX_TERM draw_triangle(UnifexEnv *env, vector2 v1, vector2 v2, vector2 v3,
   return draw_triangle_result_ok(env);
 }
 
+UNIFEX_TERM draw_poly(UnifexEnv *env, vector2 center, int sides, double radius, double rotation, color c) {
+  DrawPoly(VECTOR2(center), sides, radius, rotation, COLOR(c));
+  return draw_poly_result_ok(env);
+}
+
 // Basic shapes collision detection functions
 
 UNIFEX_TERM check_collision_point_rec(UnifexEnv *env, vector2 p, rectangle r) {

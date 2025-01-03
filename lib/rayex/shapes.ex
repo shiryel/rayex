@@ -48,6 +48,10 @@ defmodule Rayex.Shapes do
   @spec draw_triangle(S.Vector2.t(), S.Vector2.t(), S.Vector2.t(), S.Color.t()) :: :ok
   defdelegate draw_triangle(vertice1, vertice2, vertice3, color), to: Raylib
 
+  @doc "Draw a regular polygon (Vector version)"
+  @spec draw_poly(S.Vector2.t(), integer(), float(), float(), S.Color.t()) :: :ok
+  defdelegate draw_poly(center, sides, radius, rotation, color), to: Raylib
+
   # Basic shapes collision detection functions
 
   @doc "Check if point is inside rectangle"
