@@ -531,6 +531,11 @@ UNIFEX_TERM draw_poly(UnifexEnv *env, vector2 center, int sides, double radius, 
 
 // Basic shapes collision detection functions
 
+UNIFEX_TERM check_collision_circles(UnifexEnv *env, vector2 c1, double r1, vector2 c2, double r2) {
+  bool res = CheckCollisionCircles(VECTOR2(c1), r1, VECTOR2(c2), r2);
+  return check_collision_circles_result(env, res);
+}
+
 UNIFEX_TERM check_collision_point_rec(UnifexEnv *env, vector2 p, rectangle r) {
   bool res = CheckCollisionPointRec(VECTOR2(p), RECTANGLE(r));
   return check_collision_point_rec_result(env, res);

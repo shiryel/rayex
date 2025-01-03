@@ -54,6 +54,10 @@ defmodule Rayex.Shapes do
 
   # Basic shapes collision detection functions
 
+  @doc "Check collision between two circles"
+  @spec check_collision_circles(S.Vector2.t(), float(), S.Vector2.t(), float()) :: boolean()
+  defdelegate check_collision_circles(center1, radius1, center2, radius2), to: Raylib
+
   @doc "Check if point is inside rectangle"
   @spec check_collision_point_rec(S.Vector2.t(), S.Rectangle.t()) :: boolean()
   defdelegate check_collision_point_rec(point, rectangle), to: Raylib
