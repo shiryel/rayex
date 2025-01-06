@@ -699,10 +699,10 @@ UNIFEX_TERM stop_sound(UnifexEnv *env, UnifexPayload *payload) {
   return stop_sound_result_ok(env);
 }
 
-UNIFEX_TERM is_sound_ready(UnifexEnv *env, UnifexPayload *payload) {
+UNIFEX_TERM is_sound_valid(UnifexEnv *env, UnifexPayload *payload) {
   Sound sound = get_sound_unifex_payload(env, payload);
-  bool res = IsSoundReady(sound);
-  return is_sound_ready_result(env, res);
+  bool res = IsSoundValid(sound);
+  return is_sound_valid_result(env, res);
 }
 
 // AudioStream management functions

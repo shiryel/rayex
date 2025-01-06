@@ -248,7 +248,7 @@ spec get_master_volume() :: volume :: float
 spec load_sound(file_name :: string) :: sound :: payload
 dirty(:io, load_sound: 1)
 
-spec is_sound_ready(sound :: payload) :: result :: bool
+spec is_sound_valid(sound :: payload) :: result :: bool
 
 # Wave/Sound management functions
 

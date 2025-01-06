@@ -32,7 +32,7 @@ You need the following packages installed on your system:
 * elixir
 * erlang (headers)
 * pkg-config
-* raylib v5
+* raylib v5.5
 * glibc
 * clang-tools (formatter)
 
