@@ -26,9 +26,9 @@ defmodule Rayex.Audio do
   @spec load_sound(String.t()) :: S.Sound.t()
   defdelegate load_sound(fileName), to: Raylib
 
-  @doc "Checks if a sound is ready"
-  @spec is_sound_ready?(S.Sound.t()) :: boolean()
-  defdelegate is_sound_ready?(sound), to: Raylib, as: :is_sound_ready
+  @doc "Checks if a sound is valid (data loaded and buffers initialized)"
+  @spec is_sound_valid?(S.Sound.t()) :: boolean()
+  defdelegate is_sound_valid?(sound), to: Raylib, as: :is_sound_valid
 
   # Wave/Sound management functions
 

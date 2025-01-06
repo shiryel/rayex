@@ -64,6 +64,14 @@ defmodule Rayex.Core do
   @spec toggle_fullscreen() :: :ok
   defdelegate toggle_fullscreen, to: Raylib
 
+  @doc "Get current screen width"
+  @spec get_screen_width() :: integer()
+  defdelegate get_screen_width, to: Raylib
+
+  @doc "Get current screen height"
+  @spec get_screen_height() :: integer()
+  defdelegate get_screen_height, to: Raylib
+
   # Cursor-related functions
 
   @doc "Shows cursor"
@@ -147,6 +155,12 @@ defmodule Rayex.Core do
   @doc "Get elapsed time in seconds since `init_window/0`"
   @spec get_time() :: float()
   defdelegate get_time, to: Raylib
+
+  # Random values generation functions
+
+  @doc "Get a random value between min and max (both included)"
+  @spec get_random_value(integer(), integer()) :: integer()
+  defdelegate get_random_value(min, max), to: Raylib
 
   # Misc. functions
 

@@ -243,6 +243,16 @@ UNIFEX_TERM toggle_fullscreen(UnifexEnv *env) {
   return toggle_fullscreen_result_ok(env);
 }
 
+UNIFEX_TERM get_screen_width(UnifexEnv *env) {
+  int res = GetScreenWidth();
+  return get_screen_width_result(env, res);
+}
+
+UNIFEX_TERM get_screen_height(UnifexEnv *env) {
+  int res = GetScreenHeight();
+  return get_screen_height_result(env, res);
+}
+
 // Cursor-related functions
 
 UNIFEX_TERM show_cursor(UnifexEnv *env) {
@@ -344,6 +354,13 @@ UNIFEX_TERM get_frame_time(UnifexEnv *env) {
 UNIFEX_TERM get_time(UnifexEnv *env) {
   double res = GetTime();
   return get_time_result(env, res);
+}
+
+// Random values generation functions
+
+UNIFEX_TERM get_random_value(UnifexEnv *env, int min, int max) {
+  int res = GetRandomValue(min, max);
+  return get_random_value_result(env, res);
 }
 
 // Misc. functions
@@ -475,9 +492,24 @@ UNIFEX_TERM draw_line(UnifexEnv *env, int start_x, int start_y, int end_x,
   return draw_pixel_result_ok(env);
 }
 
+UNIFEX_TERM draw_circle(UnifexEnv *env, int center_x, int center_y, double radius, color c) {
+  DrawCircle(center_x, center_y, radius, COLOR(c));
+  return draw_circle_result_ok(env);
+}
+
+UNIFEX_TERM draw_circle_v(UnifexEnv *env, vector2 center, double radius, color c) {
+  DrawCircleV(VECTOR2(center), radius, COLOR(c));
+  return draw_circle_v_result_ok(env);
+}
+
 UNIFEX_TERM draw_rectangle_rec(UnifexEnv *env, rectangle r, color c) {
   DrawRectangleRec(RECTANGLE(r), COLOR(c));
   return draw_rectangle_rec_result_ok(env);
+}
+
+UNIFEX_TERM draw_rectangle_pro(UnifexEnv *env, rectangle r, vector2 origin, double rotation, color c) {
+  DrawRectanglePro(RECTANGLE(r), VECTOR2(origin), rotation, COLOR(c));
+  return draw_rectangle_pro_result_ok(env);
 }
 
 UNIFEX_TERM draw_rectangle_lines_ex(UnifexEnv *env, rectangle r, int line_thick,
@@ -492,7 +524,17 @@ UNIFEX_TERM draw_triangle(UnifexEnv *env, vector2 v1, vector2 v2, vector2 v3,
   return draw_triangle_result_ok(env);
 }
 
+UNIFEX_TERM draw_poly(UnifexEnv *env, vector2 center, int sides, double radius, double rotation, color c) {
+  DrawPoly(VECTOR2(center), sides, radius, rotation, COLOR(c));
+  return draw_poly_result_ok(env);
+}
+
 // Basic shapes collision detection functions
+
+UNIFEX_TERM check_collision_circles(UnifexEnv *env, vector2 c1, double r1, vector2 c2, double r2) {
+  bool res = CheckCollisionCircles(VECTOR2(c1), r1, VECTOR2(c2), r2);
+  return check_collision_circles_result(env, res);
+}
 
 UNIFEX_TERM check_collision_point_rec(UnifexEnv *env, vector2 p, rectangle r) {
   bool res = CheckCollisionPointRec(VECTOR2(p), RECTANGLE(r));
@@ -657,10 +699,10 @@ UNIFEX_TERM stop_sound(UnifexEnv *env, UnifexPayload *payload) {
   return stop_sound_result_ok(env);
 }
 
-UNIFEX_TERM is_sound_ready(UnifexEnv *env, UnifexPayload *payload) {
+UNIFEX_TERM is_sound_valid(UnifexEnv *env, UnifexPayload *payload) {
   Sound sound = get_sound_unifex_payload(env, payload);
-  bool res = IsSoundReady(sound);
-  return is_sound_ready_result(env, res);
+  bool res = IsSoundValid(sound);
+  return is_sound_valid_result(env, res);
 }
 
 // AudioStream management functions

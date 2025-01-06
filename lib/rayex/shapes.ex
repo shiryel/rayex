@@ -24,9 +24,21 @@ defmodule Rayex.Shapes do
   @spec draw_line(integer(), integer(), integer(), integer(), S.Color.t()) :: :ok
   defdelegate draw_line(start_x, start_y, end_x, end_y, color), to: Raylib
 
+  @doc "Draw a color-filled circle"
+  @spec draw_circle(integer(), integer(), float(), S.Color.t()) :: :ok
+  defdelegate draw_circle(center_x, center_y, radius, color), to: Raylib
+
+  @doc "Draw a color-filled circle (Vector version)"
+  @spec draw_circle_v(S.Vector2.t(), float(), S.Color.t()) :: :ok
+  defdelegate draw_circle_v(center, radius, color), to: Raylib
+
   @doc "Draw a color-filled rectangle"
   @spec draw_rectangle_rec(S.Rectangle.t(), S.Color.t()) :: :ok
   defdelegate draw_rectangle_rec(rectangle, color), to: Raylib
+
+  @doc "Draw a color-filled rectangle with pro parameters"
+  @spec draw_rectangle_pro(S.Rectangle.t(), S.Vector2.t(), float(), S.Color.t()) :: :ok
+  defdelegate draw_rectangle_pro(rectangle, origin, rotation, color), to: Raylib
 
   @doc "Draw rectangle outline with extended parameters"
   @spec draw_rectangle_lines_ex(S.Rectangle.t(), integer(), S.Color.t()) :: :ok
@@ -36,7 +48,15 @@ defmodule Rayex.Shapes do
   @spec draw_triangle(S.Vector2.t(), S.Vector2.t(), S.Vector2.t(), S.Color.t()) :: :ok
   defdelegate draw_triangle(vertice1, vertice2, vertice3, color), to: Raylib
 
+  @doc "Draw a regular polygon (Vector version)"
+  @spec draw_poly(S.Vector2.t(), integer(), float(), float(), S.Color.t()) :: :ok
+  defdelegate draw_poly(center, sides, radius, rotation, color), to: Raylib
+
   # Basic shapes collision detection functions
+
+  @doc "Check collision between two circles"
+  @spec check_collision_circles(S.Vector2.t(), float(), S.Vector2.t(), float()) :: boolean()
+  defdelegate check_collision_circles(center1, radius1, center2, radius2), to: Raylib
 
   @doc "Check if point is inside rectangle"
   @spec check_collision_point_rec(S.Vector2.t(), S.Rectangle.t()) :: boolean()
