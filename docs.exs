@@ -2,6 +2,7 @@ alias Rayex.{Audio, Core, Models, Shapes, Structs, Text, Textures, Keys}
 
 [
   main: "readme",
+  source_ref: "master",
   extras: [
     "README.md"
   ],

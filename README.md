@@ -10,7 +10,7 @@ Rayex provides Elixir NIF bindings to [Raylib](https://www.raylib.com/)
 
 > NOTE: some of the functions on raylib are not implemented yet, check the [contributing section](#contributing) to help
 
-![](examples/3d_picking.gif)
+![](examples/resources/3d_picking.gif)
 
 ## Installation
 

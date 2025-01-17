@@ -51,23 +51,3 @@ jobs:
 
     - name: Check Dialyzer
       run: mix dialyzer
-
-    - name: Check 3D Picking example
-      run: |
-        cd examples/3d_picking
-        mix deps.get
-        mix compile --warnings-as-errors
-        mix credo --strict
-        mix format --check-formatted
-        mix dialyzer --force-check
-        cd ../..
-
-    - name: Check Scale Rectangle example
-      run: |
-        cd examples/scale_rectangle
-        mix deps.get
-        mix compile --warnings-as-errors
-        mix credo --strict
-        mix format --check-formatted
-        mix dialyzer --force-check
-        cd ../..

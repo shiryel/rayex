@@ -12,7 +12,7 @@
     {
       devShell = systems (pkgs: pkgs.mkShell {
         nativeBuildInputs = with pkgs; [
-          elixir_1_17
+          elixir
           erlang
           gnumake
           pkg-config

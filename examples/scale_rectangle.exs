@@ -1,3 +1,9 @@
+#!elixir
+
+Mix.install([
+  {:rayex, path: ".."}
+])
+
 defmodule ScaleRectangle do
   @moduledoc """
   Documentation for `ScaleRectangle`.
@@ -96,3 +102,5 @@ defmodule ScaleRectangle do
     (rec.height < @mouse_mark_size && %{rec | height: @mouse_mark_size}) || rec
   end
 end
+
+ScaleRectangle.run()

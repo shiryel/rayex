@@ -4,7 +4,7 @@ defmodule Rayex.MixProject do
   def project do
     [
       app: :rayex,
-      version: "0.0.3",
+      version: "0.0.4",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       compilers: [:unifex, :bundlex] ++ Mix.compilers(),
@@ -47,8 +47,7 @@ defmodule Rayex.MixProject do
       maintainers: ["Shiryel"],
       licenses: ["Apache-2.0"],
       links: %{"GitHub" => "https://github.com/shiryel/rayex"},
-      files:
-        ~w(.formatter.exs docs.exs README.md mix.exs bundlex.exs c_src/rayex/rayex.c c_src/rayex/rayex.h c_src/rayex/rayex.spec.exs lib)
+      files: ~w(.formatter.exs docs.exs README.md mix.exs bundlex.exs c_src/rayex lib)
     ]
   end
 end

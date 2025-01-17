@@ -1,3 +1,9 @@
+#!elixir
+
+Mix.install([
+  {:rayex, path: ".."}
+])
+
 defmodule The3dPicking do
   @moduledoc false
 
@@ -116,3 +122,5 @@ defmodule The3dPicking do
     collision.hit
   end
 end
+
+The3dPicking.run()
